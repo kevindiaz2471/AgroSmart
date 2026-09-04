@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart IoT - Sistema de Automatización de Riego</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation Header -->
+        <header class="main-header">
+            <div class="brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <div>
+                    <h1>AgroSmart <span>IoT</span></h1>
+                    <p class="subtitle">Sistema Inteligente de Automatización de Riego</p>
+                </div>
+            </div>
+
+            <div class="header-controls">
+                <div class="location-picker">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <select id="locationSelect" aria-label="Seleccionar Lugar de Riego">
+                        <!-- Populated by JS -->
+                    </select>
+                    <button class="btn btn-icon" id="btnNewPlace" title="Registrar nuevo lugar">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <div class="system-status badge-online" id="systemStatusBadge">
+                    <span class="status-dot"></span>
+                    <span id="systemStatusText">Sistema En Línea</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace Grid -->
+        <main class="dashboard-grid">
+            <!-- Sidebar: Zones List & Controls -->
+            <aside class="sidebar-card card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-layer-group"></i> Zonas de Riego</h2>
+                    <button class="btn btn-sm btn-primary" id="btnNewZone">
+                        <i class="fa-solid fa-plus"></i> Nueva Zona
+                    </button>
+                </div>
+                <div class="zones-list" id="zonesList">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="place-info-box" id="placeInfoBox">
+                    <h3><i class="fa-solid fa-circle-info"></i> Información del Lugar</h3>
+                    <p id="placeDescription">Cargando...</p>
+                    <div class="place-meta">
+                        <span><i class="fa-solid fa-map-pin"></i> <span id="placeCoords">--</span></span>
+                        <button class="btn-link" id="btnEditPlace">Editar Lugar</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Content: Primary Monitor & Interactive Controls -->
+            <section class="main-content">
+                <!-- Zone Header Bar -->
+                <div class="zone-header-card card">
+                    <div class="zone-title-group">
+                        <h2 id="currentZoneName">Zona 1 - Invernadero A</h2>
+                        <span class="crop-badge" id="currentZoneCrop"><i class="fa-solid fa-wheat-awn"></i> Tomates Cherry</span>
+                    </div>
+
+                    <div class="mode-selector">
+                        <label>Modo de Funcionamiento:</label>
+                        <div class="mode-toggle-group">
+                            <button class="btn-mode active" data-mode="AUTO"><i class="fa-solid fa-robot"></i> Automático</button>
+                            <button class="btn-mode" data-mode="MANUAL"><i class="fa-solid fa-hand-pointer"></i> Manual</button>
+                            <button class="btn-mode" data-mode="SCHEDULED"><i class="fa-solid fa-clock"></i> Programado</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telemetry & Sensor Visualizer Cards Grid -->
+                <div class="telemetry-grid">
+                    <!-- Moisture Gauge Card -->
+                    <div class="card gauge-card">
+                        <h3><i class="fa-solid fa-droplet"></i> Humedad del Suelo</h3>
+                        <div class="gauge-container">
+                            <svg class="gauge-svg" viewBox="0 0 100 100">
+                                <path class="gauge-bg" d="M 15,80 A 40,40 0 1,1 85,80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10" stroke-linecap="round"/>
+                                <path class="gauge-fill" id="gaugeFill" d="M 15,80 A 40,40 0 1,1 85,80" fill="none" stroke="url(#moistureGradient)" stroke-width="10" stroke-dasharray="188.4" stroke-dashoffset="188.4" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="moistureGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#ef4444" />
+                                        <stop offset="40%" stop-color="#f59e0b" />
+                                        <stop offset="70%" stop-color="#10b981" />
+                                        <stop offset="100%" stop-color="#3b82f6" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="gauge-value">
+                                <span id="moistureValue">42</span><span class="unit">%</span>
+                                <div class="gauge-status" id="moistureStatusLabel">Óptimo</div>
+                            </div>
+                        </div>
+
+                        <!-- Threshold markers display -->
+                        <div class="thresholds-bar">
+                            <div class="thresh-item thresh-min">
+                                <span class="label">Mín ($H_{\text{mín}}$):</span>
+                                <span class="val" id="dispMinThreshold">30%</span>
+                            </div>
+                            <div class="thresh-item thresh-max">
+                                <span class="label">Máx ($H_{\text{máx}}$):</span>
+                                <span class="val" id="dispMaxThreshold">70%</span>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Simulation Slider -->
+                        <div class="simulation-slider-box">
+                            <div class="sim-header">
+                                <label for="simMoistureRange"><i class="fa-solid fa-sliders"></i> Simular Lectura de Humedad (IoT)</label>
+                                <button class="btn-xs btn-outline" id="btnToggleAutoDry">
+                                    <i class="fa-solid fa-play" id="simPlayIcon"></i> Auto Secar
+                                </button>
+                            </div>
+                            <input type="range" id="simMoistureRange" min="0" max="100" value="42">
+                        </div>
+                    </div>
+
+                    <!-- Pump Actuator State & Manual Control -->
+                    <div class="card pump-card">
+                        <h3><i class="fa-solid fa-water-ladder"></i> Estado de la Bomba de Agua</h3>
+                        
+                        <div class="pump-status-container">
+                            <div class="pump-visual" id="pumpVisual">
+                                <div class="pump-icon-circle" id="pumpIconCircle">
+                                    <i class="fa-solid fa-faucet-drip"></i>
+                                </div>
+                                <div class="water-waves" id="waterWaves">
+                                    <div class="wave wave1"></div>
+                                    <div class="wave wave2"></div>
+                                </div>
+                            </div>
+                            <div class="pump-state-text">
+                                <div class="state-label" id="pumpStateText">APAGADA</div>
+                                <div class="state-sub" id="pumpStateSub">Bomba Inactiva - Esperando disparo por umbral</div>
+                            </div>
+                        </div>
+
+                        <div class="manual-controls">
+                            <button class="btn btn-success btn-lg" id="btnPumpOn">
+                                <i class="fa-solid fa-play"></i> Encender Riego
+                            </button>
+                            <button class="btn btn-danger btn-lg" id="btnPumpOff">
+                                <i class="fa-solid fa-square"></i> Detener Riego
+                            </button>
+                        </div>
+
+                        <div class="safety-indicators">
+                            <div class="safety-item">
+                                <i class="fa-solid fa-shield-halved" id="watchdogIcon"></i>
+                                <span>Perro Guardián Máx: <strong id="dispMaxDuration">15 min</strong></span>
+                            </div>
+                            <div class="safety-item">
+                                <i class="fa-solid fa-faucet-drip" id="tankLevelIcon"></i>
+                                <span>Depósito Agua: <strong id="dispTankLevel">OK (Lleno)</strong></span>
+                                <button class="btn-xs btn-link" id="btnToggleTank" style="margin-left: 5px;">[Simular Vacío]</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Config & Schedule Panel Tabs -->
+                <div class="card zone-config-card">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="tabConfig"><i class="fa-solid fa-sliders"></i> Configuración de Umbrales</button>
+                        <button class="tab-btn" data-tab="tabSchedules"><i class="fa-solid fa-calendar-days"></i> Horarios Programados</button>
+                        <button class="tab-btn" data-tab="tabAlerts"><i class="fa-solid fa-bell"></i> Alertas de Sistema (<span id="alertCount">0</span>)</button>
+                    </div>
+
+                    <div class="tab-content active" id="tabConfig">
+                        <form id="configForm" class="config-grid">
+                            <div class="form-group">
+                                <label for="inputMinMoisture">Humedad Mínima de Activación ($H_{\text{mín}}$ %)</label>
+                                <input type="number" id="inputMinMoisture" min="5" max="90" value="30" required>
+                                <small>Si el sensor detecta un valor menor, se enciende la bomba.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMaxMoisture">Humedad Máxima de Apagado ($H_{\text{máx}}$ %)</label>
+                                <input type="number" id="inputMaxMoisture" min="10" max="99" value="70" required>
+                                <small>Al alcanzar este nivel, el riego se detiene.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMaxDuration">Duración Máxima de Seguridad (minutos)</label>
+                                <input type="number" id="inputMaxDuration" min="1" max="120" value="15" required>
+                                <small>Protección de corte forzado (Watchdog timer).</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputInterval">Frecuencia de Muestreo Sensor (segundos)</label>
+                                <input type="number" id="inputInterval" min="5" max="3600" value="15" required>
+                                <small>Intervalo de lecturas enviadas por el ESP32.</small>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar Parámetros</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-content" id="tabSchedules">
+                        <div class="schedules-bar">
+                            <p>Define turnos automáticos de riego por horario independientemente del sensor de humedad.</p>
+                            <button class="btn btn-sm btn-primary" id="btnAddSchedule"><i class="fa-solid fa-plus"></i> Agregar Horario</button>
+                        </div>
+                        <div class="schedules-list" id="schedulesList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tabAlerts">
+                        <div class="alerts-list" id="alertsList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Log Section -->
+                <div class="card history-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-clock-rotate-left"></i> Historial de Eventos de Riego</h2>
+                        <button class="btn btn-xs btn-outline" id="btnClearHistory"><i class="fa-solid fa-trash"></i> Limpiar</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha / Hora Inicio</th>
+                                    <th>Duración</th>
+                                    <th>Tipo Activación</th>
+                                    <th>Humedad Previa</th>
+                                    <th>Humedad Final</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Modal Place -->
+    <div class="modal-overlay" id="modalPlace">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalPlaceTitle">Registrar Lugar de Riego</h3>
+                <button class="btn-close" id="btnCloseModalPlace">&times;</button>
+            </div>
+            <form id="placeForm">
+                <div class="form-group">
+                    <label for="placeName">Nombre del Lugar</label>
+                    <input type="text" id="placeName" placeholder="Ej: Finca San José / Invernadero Norte" required>
+                </div>
+                <div class="form-group">
+                    <label for="placeLocation">Ubicación / Coordenadas</label>
+                    <input type="text" id="placeLocation" placeholder="Ej: Sector El Carmen, Parcela 4" required>
+                </div>
+                <div class="form-group">
+                    <label for="placeDesc">Descripción</label>
+                    <textarea id="placeDesc" rows="3" placeholder="Detalles de la instalación..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btnCancelPlace">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Lugar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Zone -->
+    <div class="modal-overlay" id="modalZone">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalZoneTitle">Crear Nueva Zona de Riego</h3>
+                <button class="btn-close" id="btnCloseModalZone">&times;</button>
+            </div>
+            <form id="zoneForm">
+                <div class="form-group">
+                    <label for="zoneName">Nombre de la Zona</label>
+                    <input type="text" id="zoneName" placeholder="Ej: Zona 2 - Fresas" required>
+                </div>
+                <div class="form-group">
+                    <label for="zoneCrop">Tipo de Cultivo / Planta</label>
+                    <input type="text" id="zoneCrop" placeholder="Ej: Horticultura, Maíz, Frutales..." required>
+                </div>
+                <div class="form-group">
+                    <label for="zoneMin">Humedad Mínima (%)</label>
+                    <input type="number" id="zoneMin" value="30" min="5" max="90" required>
+                </div>
+                <div class="form-group">
+                    <label for="zoneMax">Humedad Máxima (%)</label>
+                    <input type="number" id="zoneMax" value="70" min="10" max="99" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btnCancelZone">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Zona</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

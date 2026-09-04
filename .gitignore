@@ -1,0 +1,14 @@
+# Dependencies & IDEs
+node_modules/
+.vscode/
+.idea/
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Gemini / Antigravity IDE Local Metadata
+.gemini/
+brain/
+scratch/

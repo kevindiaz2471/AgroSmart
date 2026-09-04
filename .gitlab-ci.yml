@@ -1,0 +1,18 @@
+# Configuración de GitLab CI/CD para desplegar el Dashboard Web en GitLab Pages
+
+image: alpine:latest
+
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - cp index.html public/
+    - cp styles.css public/
+    - cp app.js public/
+    - cp sistema_riego_iot_propuesta.md public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+    - master
