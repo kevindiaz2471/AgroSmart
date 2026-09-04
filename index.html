@@ -13,7 +13,83 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
+    <!-- Fullscreen Login & Authentication Overlay -->
+    <div class="auth-overlay active" id="authOverlay">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <h2>AgroSmart <span>IoT</span></h2>
+                <p>Plataforma de Control y Automatización Agrícola</p>
+            </div>
+
+            <!-- Auth Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="btnTabLogin"><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión</button>
+                <button class="auth-tab-btn" id="btnTabRegister"><i class="fa-solid fa-user-plus"></i> Registrarse</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
+                    <input type="email" id="loginEmail" placeholder="ejemplo@upec.edu.ec" value="admin@agrosmart.io" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                    <div class="password-input-group">
+                        <input type="password" id="loginPassword" placeholder="••••••••" value="admin123" required>
+                        <button type="button" class="btn-toggle-pw" id="toggleLoginPassword"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="auth-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" checked> Recordar sesión
+                    </label>
+                    <a href="#" class="btn-link" id="btnForgotPw">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Ingresar al Dashboard
+                </button>
+                <div class="demo-credentials-box">
+                    <p><i class="fa-solid fa-key"></i> <strong>Credenciales Demo:</strong></p>
+                    <small>Email: <code>admin@agrosmart.io</code> | Clave: <code>admin123</code></small>
+                    <button type="button" class="btn-xs btn-outline" id="btnQuickDemo" style="margin-top:6px;">Usar Credenciales Demo</button>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="regName"><i class="fa-solid fa-user"></i> Nombre Completo</label>
+                    <input type="text" id="regName" placeholder="Ing. Kevin Díaz" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail"><i class="fa-solid fa-envelope"></i> Correo Institucional / Personal</label>
+                    <input type="email" id="regEmail" placeholder="usuario@upec.edu.ec" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword"><i class="fa-solid fa-lock"></i> Crear Contraseña</label>
+                    <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" required>
+                </div>
+                <div class="form-group">
+                    <label for="regRole"><i class="fa-solid fa-user-shield"></i> Rol de Usuario</label>
+                    <select id="regRole">
+                        <option value="Administrador Agrícola">Administrador Agrícola / Ingeniero</option>
+                        <option value="Operador de Riego">Operador de Riego</option>
+                        <option value="Investigador / Técnico">Investigador / Técnico UPEC</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success btn-block btn-lg">
+                    <i class="fa-solid fa-user-check"></i> Crear Cuenta y Acceder
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Dashboard Application Container (Initially hidden until logged in) -->
+    <div class="app-container" id="mainAppContainer">
         <!-- Top Navigation Header -->
         <header class="main-header">
             <div class="brand">
@@ -27,6 +103,7 @@
             </div>
 
             <div class="header-controls">
+                <!-- Location Picker -->
                 <div class="location-picker">
                     <i class="fa-solid fa-location-dot"></i>
                     <select id="locationSelect" aria-label="Seleccionar Lugar de Riego">
@@ -37,9 +114,22 @@
                     </button>
                 </div>
 
+                <!-- System Status -->
                 <div class="system-status badge-online" id="systemStatusBadge">
                     <span class="status-dot"></span>
                     <span id="systemStatusText">Sistema En Línea</span>
+                </div>
+
+                <!-- Authenticated User Profile Widget -->
+                <div class="user-profile-widget" id="userProfileWidget">
+                    <div class="user-avatar" id="userAvatar">KD</div>
+                    <div class="user-info">
+                        <span class="user-name" id="userNameDisplay">Ing. Kevin Díaz</span>
+                        <span class="user-role" id="userRoleDisplay">Administrador Agrícola</span>
+                    </div>
+                    <button class="btn-logout" id="btnLogout" title="Cerrar Sesión">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
                 </div>
             </div>
         </header>

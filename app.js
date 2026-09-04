@@ -1,15 +1,36 @@
 /* ==========================================================================
-   AgroSmart IoT - Core Application & Simulation Logic
+   AgroSmart IoT - Core Application, Authentication & Control Engine
    ========================================================================== */
 
-// Initial Mock Database State
+// Mock Database & Session State
 const appState = {
+    // Current Authenticated User Session
+    currentUser: null,
+
     currentPlaceId: "place-1",
     currentZoneId: "zone-1",
+
+    users: [
+        {
+            id: "usr-1",
+            email: "admin@agrosmart.io",
+            password: "admin123",
+            name: "Ing. Kevin Díaz",
+            role: "Administrador Agrícola"
+        },
+        {
+            id: "usr-2",
+            email: "operador@upec.edu.ec",
+            password: "user123",
+            name: "Carlos Mendoza",
+            role: "Operador de Riego"
+        }
+    ],
 
     places: [
         {
             id: "place-1",
+            userId: "usr-1",
             name: "Finca El Paraíso - Invernaderos",
             location: "Sector La Cocha, Parcela 12",
             coords: "4.6097, -74.0817",
@@ -17,6 +38,7 @@ const appState = {
         },
         {
             id: "place-2",
+            userId: "usr-1",
             name: "Huerto Experimental Sur",
             location: "Valle Central, Campo B",
             coords: "3.4516, -76.5320",
@@ -109,12 +131,28 @@ const appState = {
     ],
 
     alerts: [],
-    autoDrySimulation: false,
-    autoDryInterval: null
+    autoDrySimulation: false
 };
 
 // DOM Elements Selection
 const el = {
+    // Auth elements
+    authOverlay: document.getElementById('authOverlay'),
+    mainAppContainer: document.getElementById('mainAppContainer'),
+    btnTabLogin: document.getElementById('btnTabLogin'),
+    btnTabRegister: document.getElementById('btnTabRegister'),
+    loginForm: document.getElementById('loginForm'),
+    registerForm: document.getElementById('registerForm'),
+    loginEmail: document.getElementById('loginEmail'),
+    loginPassword: document.getElementById('loginPassword'),
+    toggleLoginPassword: document.getElementById('toggleLoginPassword'),
+    btnQuickDemo: document.getElementById('btnQuickDemo'),
+    userNameDisplay: document.getElementById('userNameDisplay'),
+    userRoleDisplay: document.getElementById('userRoleDisplay'),
+    userAvatar: document.getElementById('userAvatar'),
+    btnLogout: document.getElementById('btnLogout'),
+    
+    // Main UI
     locationSelect: document.getElementById('locationSelect'),
     btnNewPlace: document.getElementById('btnNewPlace'),
     btnEditPlace: document.getElementById('btnEditPlace'),
@@ -179,13 +217,125 @@ const el = {
     zoneForm: document.getElementById('zoneForm')
 };
 
-// Initialize App
+// Initialize Application
 function initApp() {
+    setupAuthListeners();
+    checkSavedSession();
+    setupEventListeners();
+    startControlLoop();
+}
+
+// Check saved user session in localStorage
+function checkSavedSession() {
+    const savedUser = localStorage.getItem('agrosmart_session');
+    if (savedUser) {
+        try {
+            appState.currentUser = JSON.parse(savedUser);
+            showDashboard();
+        } catch (e) {
+            showLogin();
+        }
+    } else {
+        showLogin();
+    }
+}
+
+// Show Authentication Overlay
+function showLogin() {
+    el.authOverlay.classList.add('active');
+}
+
+// Show Main Dashboard when authenticated
+function showDashboard() {
+    if (!appState.currentUser) return;
+
+    el.authOverlay.classList.remove('active');
+    
+    // Update Header User Widget
+    el.userNameDisplay.textContent = appState.currentUser.name;
+    el.userRoleDisplay.textContent = appState.currentUser.role;
+    
+    // Initials for avatar
+    const initials = appState.currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    el.userAvatar.textContent = initials || "US";
+
     renderPlacesDropdown();
     renderZonesList();
     loadZoneData(appState.currentZoneId);
-    setupEventListeners();
-    startControlLoop();
+}
+
+// Setup Authentication Event Listeners
+function setupAuthListeners() {
+    // Auth Tab Switcher
+    el.btnTabLogin.addEventListener('click', () => {
+        el.btnTabLogin.classList.add('active');
+        el.btnTabRegister.classList.remove('active');
+        el.loginForm.classList.add('active');
+        el.registerForm.classList.remove('active');
+    });
+
+    el.btnTabRegister.addEventListener('click', () => {
+        el.btnTabRegister.classList.add('active');
+        el.btnTabLogin.classList.remove('active');
+        el.registerForm.classList.add('active');
+        el.loginForm.classList.remove('active');
+    });
+
+    // Password Visibility Toggle
+    el.toggleLoginPassword.addEventListener('click', () => {
+        const type = el.loginPassword.type === 'password' ? 'text' : 'password';
+        el.loginPassword.type = type;
+        el.toggleLoginPassword.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+    });
+
+    // Quick Fill Demo Credentials
+    el.btnQuickDemo.addEventListener('click', () => {
+        el.loginEmail.value = "admin@agrosmart.io";
+        el.loginPassword.value = "admin123";
+    });
+
+    // Login Form Submit
+    el.loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = el.loginEmail.value.trim();
+        const pw = el.loginPassword.value;
+
+        const user = appState.users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pw);
+
+        if (user) {
+            appState.currentUser = user;
+            if (document.getElementById('rememberMe').checked) {
+                localStorage.setItem('agrosmart_session', JSON.stringify(user));
+            }
+            showDashboard();
+        } else {
+            alert("Credenciales incorrectas. Intenta con admin@agrosmart.io / admin123");
+        }
+    });
+
+    // Register Form Submit
+    el.registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newUser = {
+            id: `usr-${Date.now()}`,
+            name: document.getElementById('regName').value,
+            email: document.getElementById('regEmail').value,
+            password: document.getElementById('regPassword').value,
+            role: document.getElementById('regRole').value
+        };
+
+        appState.users.push(newUser);
+        appState.currentUser = newUser;
+        localStorage.setItem('agrosmart_session', JSON.stringify(newUser));
+        showDashboard();
+    });
+
+    // Logout
+    el.btnLogout.addEventListener('click', () => {
+        appState.currentUser = null;
+        localStorage.removeItem('agrosmart_session');
+        showLogin();
+    });
 }
 
 // Render Places Dropdown
@@ -356,7 +506,9 @@ function startControlLoop() {
             }
         });
 
-        renderZonesList();
+        if (appState.currentUser) {
+            renderZonesList();
+        }
     }, 1000);
 }
 
@@ -440,7 +592,7 @@ function renderAlertsList() {
     }
     el.alertsList.innerHTML = appState.alerts.map(a => `
         <div class="alert-item" style="padding: 10px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--danger); margin-bottom: 8px; border-radius: 4px;">
-            <div style="display:flex; justify-between; font-size:12px; font-weight:600; color: var(--danger);">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600; color: var(--danger);">
                 <span>[${a.type}] ${a.zoneName}</span>
                 <span>${a.time}</span>
             </div>
@@ -468,7 +620,7 @@ function renderSchedulesList(zone) {
     `).join('');
 }
 
-// Setup Event Listeners
+// Setup Dashboard Event Listeners
 function setupEventListeners() {
     // Location picker change
     el.locationSelect.addEventListener('change', (e) => {
@@ -572,6 +724,7 @@ function setupEventListeners() {
         e.preventDefault();
         const newPlace = {
             id: `place-${Date.now()}`,
+            userId: appState.currentUser ? appState.currentUser.id : "usr-1",
             name: document.getElementById('placeName').value,
             location: document.getElementById('placeLocation').value,
             coords: "4.6000, -74.0000",
