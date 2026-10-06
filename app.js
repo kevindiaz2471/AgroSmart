@@ -153,6 +153,8 @@ const el = {
     btnLogout: document.getElementById('btnLogout'),
     
     // Main UI
+    btnOpenManual: document.getElementById('btnOpenManual'),
+    btnOpenManualSidebar: document.getElementById('btnOpenManualSidebar'),
     locationSelect: document.getElementById('locationSelect'),
     btnNewPlace: document.getElementById('btnNewPlace'),
     btnEditPlace: document.getElementById('btnEditPlace'),
@@ -622,6 +624,18 @@ function renderSchedulesList(zone) {
 
 // Setup Dashboard Event Listeners
 function setupEventListeners() {
+    const openManual = () => {
+        window.location.href = 'manual-usuario.html';
+    };
+
+    if (el.btnOpenManual) {
+        el.btnOpenManual.addEventListener('click', openManual);
+    }
+
+    if (el.btnOpenManualSidebar) {
+        el.btnOpenManualSidebar.addEventListener('click', openManual);
+    }
+
     // Location picker change
     el.locationSelect.addEventListener('change', (e) => {
         appState.currentPlaceId = e.target.value;

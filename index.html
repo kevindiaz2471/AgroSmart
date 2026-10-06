@@ -103,6 +103,10 @@
             </div>
 
             <div class="header-controls">
+                <button class="btn btn-outline btn-sm" id="btnOpenManual" title="Abrir el Manual de Usuario">
+                    <i class="fa-solid fa-book-open"></i> Manual de Usuario
+                </button>
+
                 <!-- Location Picker -->
                 <div class="location-picker">
                     <i class="fa-solid fa-location-dot"></i>
@@ -155,6 +159,14 @@
                         <span><i class="fa-solid fa-map-pin"></i> <span id="placeCoords">--</span></span>
                         <button class="btn-link" id="btnEditPlace">Editar Lugar</button>
                     </div>
+                </div>
+
+                <div class="place-info-box doc-box">
+                    <h3><i class="fa-solid fa-book-open"></i> Manual del Sistema</h3>
+                    <p>Aprende a usar el sistema de riego inteligente, interpretar sensores y ajustar parámetros.</p>
+                    <button class="btn btn-sm btn-primary btn-block" id="btnOpenManualSidebar" type="button">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Manual
+                    </button>
                 </div>
             </aside>
 

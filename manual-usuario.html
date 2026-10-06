@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual de Usuario - AgroSmart IoT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --bg-card: rgba(22, 30, 49, 0.82);
+      --bg-soft: rgba(15, 23, 42, 0.7);
+      --border: rgba(255,255,255,0.08);
+      --primary: #10b981;
+      --secondary: #3b82f6;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #06b6d4;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --shadow: 0 18px 45px rgba(0,0,0,0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08), transparent 35%),
+        radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.08), transparent 35%),
+        var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 32px auto 60px;
+      padding: 0 20px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding: 18px 22px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), #0f766e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav a, .btn {
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 0.92rem;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover, .btn:hover { background: rgba(255,255,255,0.08); }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .hero {
+      background: rgba(22, 30, 49, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px 28px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.14);
+      color: var(--primary);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 820px;
+      font-size: 1.05rem;
+      margin-bottom: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 22px 0 0;
+    }
+
+    .feature {
+      background: rgba(0,0,0,0.22);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    section {
+      background: rgba(22, 30, 49, 0.82);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 24px 18px;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 1.65rem;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    p, li {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      margin: 10px 0 0;
+    }
+
+    .callout {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 10px 0 16px;
+      color: var(--text);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.18);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .step strong {
+      color: var(--text);
+    }
+
+    code {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px 8px;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      color: #e5f9ef;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 26px;
+      padding-bottom: 30px;
+    }
+
+    @media (max-width: 700px) {
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .nav { width: 100%; }
+      .nav a { flex: 1 1 auto; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+        <span>AgroSmart IoT</span>
+      </div>
+      <nav class="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#login">Acceso</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#zonas">Zonas</a>
+        <a href="#configuracion">Configuración</a>
+        <a href="#solucion">Solución de problemas</a>
+        <a href="index.html" class="btn btn-primary">Volver al sistema</a>
+      </nav>
+    </div>
+
+    <header class="hero" id="inicio">
+      <div class="eyebrow">Manual del usuario</div>
+      <h1>Guía de uso del sistema de riego inteligente AgroSmart IoT</h1>
+      <p class="lead">
+        Este sistema permite monitorear, controlar y automatizar el riego agrícola de forma visual y sencilla.
+        Está pensado para que operarios, administradores y técnicos puedan supervisar la humedad del suelo,
+        activar la bomba, definir umbrales y revisar el historial de eventos sin complicaciones.
+      </p>
+
+      <div class="grid">
+        <div class="feature">
+          <h3>1. Inicio de sesión</h3>
+          <p>Accede con tus credenciales del sistema o usa las credenciales demo para probar la plataforma.</p>
+        </div>
+        <div class="feature">
+          <h3>2. Monitoreo inteligente</h3>
+          <p>Observa la humedad del suelo, el estado de la bomba y el estado del depósito de agua.</p>
+        </div>
+        <div class="feature">
+          <h3>3. Automatización</h3>
+          <p>Configura umbrales, modos de operación y horarios programados para riego eficiente.</p>
+        </div>
+        <div class="feature">
+          <h3>4. Historial y alertas</h3>
+          <p>Revisa eventos, errores y actividades pasadas para decidir mejoras y mantener el sistema estable.</p>
+        </div>
+      </div>
+    </header>
+
+    <section id="login">
+      <h2>1. Acceso al sistema</h2>
+
+      <div class="callout">
+        El sistema requiere iniciar sesión antes de ingresar al dashboard. La pantalla principal incluye una vista de autenticación con dos opciones: <strong>Iniciar sesión</strong> y <strong>Registrarse</strong>.
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3>Credenciales demo</h3>
+          <p><strong>Email:</strong> <code>admin@agrosmart.io</code></p>
+          <p><strong>Contraseña:</strong> <code>admin123</code></p>
+          <p>También puedes crear un usuario nuevo desde la pestaña de registro.</p>
+        </div>
+        <div>
+          <h3>Proceso recomendado</h3>
+          <ol>
+            <li>Escribe tu correo electrónico.</li>
+            <li>Ingresa la contraseña correcta.</li>
+            <li>Marca “Recordar sesión” si deseas mantener el acceso activo.</li>
+            <li>Haz clic en “Ingresar al Dashboard”.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard">
+      <h2>2. Comprendiendo el dashboard</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>Cabecera principal</h3>
+          <ul>
+            <li>Selector de lugar o finca.</li>
+            <li>Indicador del estado del sistema.</li>
+            <li>Botón de acceso al manual de usuario.</li>
+            <li>Perfil del usuario actual.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Panel principal</h3>
+          <ul>
+            <li>Lista de zonas de riego.</li>
+            <li>Información del lugar seleccionado.</li>
+            <li>Estado de humedad del suelo.</li>
+            <li>Estado de la bomba y control manual.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        La parte central del dashboard muestra en tiempo real la humedad actual de la zona seleccionada, el modo de funcionamiento y si la bomba está encendida o apagada.
+      </div>
+    </section>
+
+    <section id="zonas">
+      <h2>3. Gestión de lugares y zonas</h2>
+
+      <div class="steps">
+        <div class="step">
+          <strong>Registrar un nuevo lugar:</strong> usa el botón “+” junto al selector de lugar para añadir una finca, invernadero o parcela.
+        </div>
+        <div class="step">
+          <strong>Crear una zona:</strong> en la barra lateral pulsa “Nueva Zona” para definir un área específica con un cultivo diferente.
+        </div>
+        <div class="step">
+          <strong>Seleccionar zona:</strong> haz clic sobre una zona en la lista para cambiar la vista y tomar decisiones sobre ese cultivo.
+        </div>
+      </div>
+
+      <p>Ejemplo: una finca puede tener varias zonas como “Zona 1 - Tomates”, “Zona 2 - Pimientos” y “Zona 3 - Maíz”, cada una con sus propios parámetros.</p>
+    </section>
+
+    <section id="configuracion">
+      <h2>4. Modo de operación y configuración</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>Modos</h3>
+          <ul>
+            <li><strong>Automático:</strong> el sistema activa o desactiva el riego según la humedad detectada.</li>
+            <li><strong>Manual:</strong> tú decides cuándo encender o apagar la bomba.</li>
+            <li><strong>Programado:</strong> se activan horarios de riego definidos previamente.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Umbrales</h3>
+          <ul>
+            <li><strong>Humedad mínima:</strong> si el suelo cae por debajo de este valor, se activa el riego.</li>
+            <li><strong>Humedad máxima:</strong> cuando llega a este valor, la bomba se apaga.</li>
+            <li><strong>Duración máxima:</strong> límite de seguridad para evitar riego excesivo.</li>
+            <li><strong>Frecuencia de muestreo:</strong> intervalos con los que se lee la humedad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        La lógica principal del sistema usa histéresis: activa el riego cuando el suelo está seco y lo detiene cuando vuelve a alcanzar un nivel adecuado.
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Sensor de humedad y bomba de agua</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>Indicador de humedad</h3>
+          <p>El medidor muestra el porcentaje de humedad del suelo. El esfuerzo del sistema es mantenerlo dentro del rango definido para cada cultivo.</p>
+          <p>Si el valor es demasiado bajo, se puede activar la bomba; si es demasiado alto, se detiene el riego.</p>
+        </div>
+        <div>
+          <h3>Control de la bomba</h3>
+          <p>En la tarjeta de la bomba puedes encenderla o detenerla manualmente. También puedes simular condiciones de vacío del depósito o activar el modo de secado para probar el comportamiento del sistema.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Horarios programados, alertas e historial</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>Horarios programados</h3>
+          <p>Desde la pestaña “Horarios Programados” puedes configurar turnos de riego automáticos por hora y días de la semana.</p>
+          <p>Esto es útil cuando el usuario desea un riego regular aunque el sensor no marque niveles críticos.</p>
+        </div>
+        <div>
+          <h3>Alertas</h3>
+          <p>El sistema genera avisos cuando ocurren eventos importantes como:</p>
+          <ul>
+            <li>Depósito de agua vacío</li>
+            <li>Timeout del perro guardián</li>
+            <li>Fallo de seguridad del sistema</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>El historial de eventos guarda la duración del riego, la humedad inicial, la final y el tipo de activación, para que el operador pueda revisar el comportamiento pasado del sistema.</p>
+    </section>
+
+    <section id="solucion">
+      <h2>7. Solución de problemas y buenas prácticas</h2>
+
+      <div class="steps">
+        <div class="step">
+          <strong>Si el sistema no riega:</strong> revisa que la zona esté seleccionada y que el modo de operación no esté en “Manual” con la bomba apagada; también verifica que el depósito no esté vacío.
+        </div>
+        <div class="step">
+          <strong>Si la humedad no cambia:</strong> comprueba que el valor del rango de simulación o los parámetros de control estén configurados correctamente.
+        </div>
+        <div class="step">
+          <strong>Si aparece una alerta de seguridad:</strong> revisa si la duración máxima del riego fue excedida o si el depósito perdió agua.
+        </div>
+        <div class="step">
+          <strong>Buenas prácticas:</strong> define valores realistas según el cultivo, revisa alertas regularmente y programa riegos de acuerdo con la etapa de crecimiento.</n>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>8. Resumen del flujo recomendado</h2>
+      <ol>
+        <li>Inicia sesión en el sistema.</li>
+        <li>Selecciona la finca o lugar correcto.</li>
+        <li>Elige la zona que deseas supervisar.</li>
+        <li>Revisa el porcentaje de humedad y el estado de la bomba.</li>
+        <li>Configura los umbrales y horarios.</li>
+        <li>Verifica alertas e historial para confirmar el funcionamiento.</li>
+      </ol>
+    </section>
+
+    <div class="footer">
+      AgroSmart IoT • Manual de usuario • Sistema inteligente de automatización de riego
+    </div>
+  </div>
+</body>
+</html>
