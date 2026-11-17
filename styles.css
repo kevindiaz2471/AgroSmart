@@ -3,33 +3,33 @@
    ========================================================================== */
 
 :root {
-    --bg-dark: #0b0f19;
-    --bg-card: rgba(22, 30, 49, 0.75);
-    --bg-card-hover: rgba(30, 41, 67, 0.85);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-highlight: rgba(16, 185, 129, 0.3);
+    --bg-dark: #F2EFE6;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FAF8F3;
+    --border-color: #DCE2D5;
+    --border-highlight: rgba(106, 153, 78, 0.45);
     
-    --primary: #10b981;
-    --primary-hover: #059669;
-    --primary-glow: rgba(16, 185, 129, 0.25);
+    --primary: #6A994E;
+    --primary-hover: #244C36;
+    --primary-glow: rgba(106, 153, 78, 0.25);
     
-    --secondary: #3b82f6;
-    --secondary-glow: rgba(59, 130, 246, 0.25);
+    --secondary: #B87543;
+    --secondary-glow: rgba(184, 117, 67, 0.25);
     
-    --warning: #f59e0b;
-    --danger: #ef4444;
-    --info: #06b6d4;
+    --warning: #E9A23B;
+    --danger: #D9534F;
+    --info: #2A9D8F;
 
-    --text-main: #f3f4f6;
-    --text-muted: #9ca3af;
-    --text-dim: #6b7280;
+    --text-main: #244C36;
+    --text-muted: #526052;
+    --text-dim: #6C7A6C;
 
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 20px;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
 
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow-main: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-main: 0 8px 24px -8px rgba(36, 76, 54, 0.12);
 }
 
 * {
@@ -41,9 +41,6 @@
 body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--bg-dark);
-    background-image: 
-        radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 45%);
     color: var(--text-main);
     min-height: 100vh;
     padding: 20px;
@@ -287,7 +284,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 16px 24px;
-    background: var(--bg-card);
+    background: #244C36;
+    color: #FFFFFF;
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);

@@ -1,0 +1,1066 @@
+{
+  "users" : [ {
+    "id" : "usr-1",
+    "email" : "admin@agrosmart.io",
+    "password" : "admin123",
+    "name" : "Ing. Kevin Díaz",
+    "role" : "Administrador Agrícola"
+  }, {
+    "id" : "usr-2",
+    "email" : "operador@upec.edu.ec",
+    "password" : "user123",
+    "name" : "Carlos Mendoza",
+    "role" : "Operador de Riego"
+  } ],
+  "places" : [ {
+    "id" : "place-1",
+    "userId" : "usr-1",
+    "name" : "Finca El Paraíso - Invernaderos",
+    "location" : "Sector La Cocha, Parcela 12",
+    "coords" : "0.8123, -77.7145",
+    "description" : "Invernaderos de cultivo de hortalizas con riego por goteo automatizado (Simulado)."
+  }, {
+    "id" : "place-2",
+    "userId" : "usr-1",
+    "name" : "Huerto Experimental UPEC Sur",
+    "location" : "Campus Universitario, Parcela B",
+    "coords" : "0.8245, -77.7210",
+    "description" : "Zona experimental de cultivos de maíz y frutales de clima frío."
+  } ],
+  "zones" : [ {
+    "id" : "zone-3",
+    "placeId" : "place-2",
+    "name" : "Zona 1 - Maíz Forrajero",
+    "cropType" : "Maíz Forrajero",
+    "mode" : "SCHEDULED",
+    "minMoisture" : 25,
+    "maxMoisture" : 65,
+    "maxDurationMin" : 30,
+    "intervalSec" : 60,
+    "cooldownSec" : 60,
+    "flowRateLpm" : 18.0,
+    "currentMoisture" : 36,
+    "pumpState" : false,
+    "tankOk" : true,
+    "sensorOk" : true,
+    "pumpStartTime" : null,
+    "pumpStartTimeFormatted" : null,
+    "pumpStartMoisture" : null,
+    "activeTriggerType" : null,
+    "plannedDurationMin" : null,
+    "lastPumpStopTime" : null,
+    "lastTelemetryTime" : "2026-11-16 23:44:20",
+    "schedules" : [ {
+      "id" : "sch-3",
+      "days" : "DIARIO",
+      "time" : "07:00",
+      "duration" : 20,
+      "active" : true,
+      "lastTriggeredKey" : null
+    } ],
+    "moistureHistory" : [ {
+      "time" : "22:29:20",
+      "moisture" : 48,
+      "pumpState" : false
+    }, {
+      "time" : "22:34:20",
+      "moisture" : 45,
+      "pumpState" : false
+    }, {
+      "time" : "22:39:20",
+      "moisture" : 42,
+      "pumpState" : false
+    }, {
+      "time" : "22:44:20",
+      "moisture" : 39,
+      "pumpState" : false
+    }, {
+      "time" : "22:49:20",
+      "moisture" : 35,
+      "pumpState" : false
+    }, {
+      "time" : "22:54:20",
+      "moisture" : 31,
+      "pumpState" : false
+    }, {
+      "time" : "22:59:20",
+      "moisture" : 28,
+      "pumpState" : true
+    }, {
+      "time" : "23:04:20",
+      "moisture" : 44,
+      "pumpState" : true
+    }, {
+      "time" : "23:09:20",
+      "moisture" : 59,
+      "pumpState" : true
+    }, {
+      "time" : "23:14:20",
+      "moisture" : 64,
+      "pumpState" : true
+    }, {
+      "time" : "23:19:20",
+      "moisture" : 56,
+      "pumpState" : false
+    }, {
+      "time" : "23:24:20",
+      "moisture" : 49,
+      "pumpState" : false
+    }, {
+      "time" : "23:29:20",
+      "moisture" : 43,
+      "pumpState" : false
+    }, {
+      "time" : "23:34:20",
+      "moisture" : 39,
+      "pumpState" : false
+    }, {
+      "time" : "23:39:20",
+      "moisture" : 36,
+      "pumpState" : false
+    } ]
+  }, {
+    "id" : "zone-1",
+    "placeId" : "place-1",
+    "name" : "Zona 1 - Tomates Cherry",
+    "cropType" : "Tomate Cherry",
+    "mode" : "AUTO",
+    "minMoisture" : 30,
+    "maxMoisture" : 70,
+    "maxDurationMin" : 15,
+    "intervalSec" : 15,
+    "cooldownSec" : 30,
+    "flowRateLpm" : 12.0,
+    "currentMoisture" : 68,
+    "pumpState" : false,
+    "tankOk" : true,
+    "sensorOk" : true,
+    "pumpStartTime" : null,
+    "pumpStartTimeFormatted" : null,
+    "pumpStartMoisture" : null,
+    "activeTriggerType" : null,
+    "plannedDurationMin" : null,
+    "lastPumpStopTime" : 1794897962669,
+    "lastTelemetryTime" : "2026-11-17 01:46:04",
+    "schedules" : [ {
+      "id" : "sch-1",
+      "days" : "LUN, MIÉ, VIE",
+      "time" : "06:00",
+      "duration" : 10,
+      "active" : true,
+      "lastTriggeredKey" : null
+    }, {
+      "id" : "sch-2",
+      "days" : "MAR, JUE",
+      "time" : "18:00",
+      "duration" : 15,
+      "active" : false,
+      "lastTriggeredKey" : null
+    } ],
+    "moistureHistory" : [ {
+      "time" : "01:45:15",
+      "moisture" : 62,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:17",
+      "moisture" : 60,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:19",
+      "moisture" : 58,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:21",
+      "moisture" : 56,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:23",
+      "moisture" : 54,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:24",
+      "moisture" : 52,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:26",
+      "moisture" : 50,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:28",
+      "moisture" : 48,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:30",
+      "moisture" : 46,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:32",
+      "moisture" : 44,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:33",
+      "moisture" : 42,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:35",
+      "moisture" : 40,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:37",
+      "moisture" : 38,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:39",
+      "moisture" : 36,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:41",
+      "moisture" : 34,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:42",
+      "moisture" : 32,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:44",
+      "moisture" : 30,
+      "pumpState" : false
+    }, {
+      "time" : "01:45:44",
+      "moisture" : 30,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:46",
+      "moisture" : 34,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:48",
+      "moisture" : 38,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:50",
+      "moisture" : 42,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:51",
+      "moisture" : 46,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:53",
+      "moisture" : 50,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:55",
+      "moisture" : 54,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:57",
+      "moisture" : 58,
+      "pumpState" : true
+    }, {
+      "time" : "01:45:59",
+      "moisture" : 62,
+      "pumpState" : true
+    }, {
+      "time" : "01:46:00",
+      "moisture" : 66,
+      "pumpState" : true
+    }, {
+      "time" : "01:46:02",
+      "moisture" : 70,
+      "pumpState" : true
+    }, {
+      "time" : "01:46:02",
+      "moisture" : 70,
+      "pumpState" : false
+    }, {
+      "time" : "01:46:04",
+      "moisture" : 68,
+      "pumpState" : false
+    } ]
+  }, {
+    "id" : "zone-2",
+    "placeId" : "place-1",
+    "name" : "Zona 2 - Pimientos Morrón",
+    "cropType" : "Pimiento Morrón",
+    "mode" : "AUTO",
+    "minMoisture" : 35,
+    "maxMoisture" : 75,
+    "maxDurationMin" : 20,
+    "intervalSec" : 30,
+    "cooldownSec" : 45,
+    "flowRateLpm" : 15.0,
+    "currentMoisture" : 58,
+    "pumpState" : false,
+    "tankOk" : true,
+    "sensorOk" : true,
+    "pumpStartTime" : null,
+    "pumpStartTimeFormatted" : null,
+    "pumpStartMoisture" : null,
+    "activeTriggerType" : null,
+    "plannedDurationMin" : null,
+    "lastPumpStopTime" : null,
+    "lastTelemetryTime" : "2026-11-16 23:44:20",
+    "schedules" : [ {
+      "id" : "sch-4",
+      "days" : "LUN, JUE",
+      "time" : "07:30",
+      "duration" : 12,
+      "active" : true,
+      "lastTriggeredKey" : null
+    } ],
+    "moistureHistory" : [ {
+      "time" : "22:29:20",
+      "moisture" : 64,
+      "pumpState" : false
+    }, {
+      "time" : "22:34:20",
+      "moisture" : 62,
+      "pumpState" : false
+    }, {
+      "time" : "22:39:20",
+      "moisture" : 60,
+      "pumpState" : false
+    }, {
+      "time" : "22:44:20",
+      "moisture" : 57,
+      "pumpState" : false
+    }, {
+      "time" : "22:49:20",
+      "moisture" : 54,
+      "pumpState" : false
+    }, {
+      "time" : "22:54:20",
+      "moisture" : 50,
+      "pumpState" : false
+    }, {
+      "time" : "22:59:20",
+      "moisture" : 46,
+      "pumpState" : true
+    }, {
+      "time" : "23:04:20",
+      "moisture" : 41,
+      "pumpState" : true
+    }, {
+      "time" : "23:09:20",
+      "moisture" : 37,
+      "pumpState" : true
+    }, {
+      "time" : "23:14:20",
+      "moisture" : 34,
+      "pumpState" : true
+    }, {
+      "time" : "23:19:20",
+      "moisture" : 52,
+      "pumpState" : false
+    }, {
+      "time" : "23:24:20",
+      "moisture" : 68,
+      "pumpState" : false
+    }, {
+      "time" : "23:29:20",
+      "moisture" : 76,
+      "pumpState" : false
+    }, {
+      "time" : "23:34:20",
+      "moisture" : 65,
+      "pumpState" : false
+    }, {
+      "time" : "23:39:20",
+      "moisture" : 58,
+      "pumpState" : false
+    } ]
+  } ],
+  "history" : [ {
+    "id" : "h-fe8c6505",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 01:45:44",
+    "endTime" : "2026-11-17 01:46:02",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-8778a29d",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 01:44:50",
+    "endTime" : "2026-11-17 01:45:08",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-db0b4cd1",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 01:08:28",
+    "endTime" : "2026-11-17 01:09:00",
+    "durationSec" : 32,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 6.4
+  }, {
+    "id" : "h-a5779fed",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 01:07:34",
+    "endTime" : "2026-11-17 01:07:52",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-dc336ebe",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 01:06:40",
+    "endTime" : "2026-11-17 01:06:58",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-e83bf8ef",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:54:09",
+    "endTime" : "2026-11-17 00:54:27",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-a947eb56",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:53:14",
+    "endTime" : "2026-11-17 00:53:32",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-1759ec1e",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:51:27",
+    "endTime" : "2026-11-17 00:51:45",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-a80f9c00",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:50:22",
+    "endTime" : "2026-11-17 00:50:40",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-21a51a43",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:49:28",
+    "endTime" : "2026-11-17 00:49:46",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-75ac8f30",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:48:34",
+    "endTime" : "2026-11-17 00:48:52",
+    "durationSec" : 18,
+    "initialMoisture" : 30,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (70% >= 70%))",
+    "waterUsedLiters" : 3.6
+  }, {
+    "id" : "h-52be17cc",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:27:14",
+    "endTime" : "2026-11-17 00:27:39",
+    "durationSec" : 25,
+    "initialMoisture" : 28,
+    "finalMoisture" : 40,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Detención manual por operador)",
+    "waterUsedLiters" : 5.0
+  }, {
+    "id" : "h-10e61ae9",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-17 00:26:14",
+    "endTime" : "2026-11-17 00:26:34",
+    "durationSec" : 20,
+    "initialMoisture" : 28,
+    "finalMoisture" : 72,
+    "triggerType" : "AUTO",
+    "status" : "CORTE (Umbral máximo alcanzado (72%))",
+    "waterUsedLiters" : 4.0
+  }, {
+    "id" : "h-1",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-16 20:44:20",
+    "endTime" : "2026-11-16 20:52:20",
+    "durationSec" : 480,
+    "initialMoisture" : 28,
+    "finalMoisture" : 71,
+    "triggerType" : "AUTO",
+    "status" : "COMPLETADO",
+    "waterUsedLiters" : 96.0
+  }, {
+    "id" : "h-2",
+    "zoneId" : "zone-2",
+    "zoneName" : "Zona 2 - Pimientos Morrón",
+    "startTime" : "2026-11-16 17:44:20",
+    "endTime" : "2026-11-16 17:54:20",
+    "durationSec" : 600,
+    "initialMoisture" : 33,
+    "finalMoisture" : 75,
+    "triggerType" : "AUTO",
+    "status" : "COMPLETADO",
+    "waterUsedLiters" : 150.0
+  }, {
+    "id" : "h-3",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-15 06:00:00",
+    "endTime" : "2026-11-15 06:10:00",
+    "durationSec" : 600,
+    "initialMoisture" : 38,
+    "finalMoisture" : 69,
+    "triggerType" : "SCHEDULED",
+    "status" : "COMPLETADO",
+    "waterUsedLiters" : 120.0
+  }, {
+    "id" : "h-4",
+    "zoneId" : "zone-3",
+    "zoneName" : "Zona 1 - Maíz Forrajero",
+    "startTime" : "2026-11-14 07:00:00",
+    "endTime" : "2026-11-14 07:15:00",
+    "durationSec" : 900,
+    "initialMoisture" : 24,
+    "finalMoisture" : 65,
+    "triggerType" : "SCHEDULED",
+    "status" : "COMPLETADO",
+    "waterUsedLiters" : 270.0
+  }, {
+    "id" : "h-5",
+    "zoneId" : "zone-2",
+    "zoneName" : "Zona 2 - Pimientos Morrón",
+    "startTime" : "2026-11-12 16:20:00",
+    "endTime" : "2026-11-12 16:26:00",
+    "durationSec" : 360,
+    "initialMoisture" : 41,
+    "finalMoisture" : 72,
+    "triggerType" : "MANUAL",
+    "status" : "COMPLETADO",
+    "waterUsedLiters" : 90.0
+  }, {
+    "id" : "h-6",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "startTime" : "2026-11-04 14:10:00",
+    "endTime" : "2026-11-04 14:19:00",
+    "durationSec" : 540,
+    "initialMoisture" : 29,
+    "finalMoisture" : 70,
+    "triggerType" : "AUTO",
+    "status" : "COMPLETADO",
+    "waterUsedLiters" : 108.0
+  } ],
+  "alerts" : [ {
+    "id" : "alt-42fc10f8",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794897962669",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 01:46:02",
+    "resolved" : false
+  }, {
+    "id" : "alt-7bfa2268",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794897944625",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 01:45:44",
+    "resolved" : false
+  }, {
+    "id" : "alt-aabd69c7",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 01:45:44",
+    "resolved" : true
+  }, {
+    "id" : "alt-bec10154",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794897908634",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 01:45:08",
+    "resolved" : false
+  }, {
+    "id" : "alt-d2fb194f",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794897890627",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 01:44:50",
+    "resolved" : false
+  }, {
+    "id" : "alt-8abe7b8d",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 01:44:50",
+    "resolved" : true
+  }, {
+    "id" : "alt-c04c3f91",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794895740475",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 6.4 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 01:09:00",
+    "resolved" : false
+  }, {
+    "id" : "alt-6565feb7",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794895708335",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 01:08:28",
+    "resolved" : false
+  }, {
+    "id" : "alt-97b97dca",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 01:08:28",
+    "resolved" : true
+  }, {
+    "id" : "alt-3a185f64",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794895672347",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 01:07:52",
+    "resolved" : false
+  }, {
+    "id" : "alt-2a037b4f",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794895654079",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 01:07:34",
+    "resolved" : false
+  }, {
+    "id" : "alt-1f8124a7",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 01:07:34",
+    "resolved" : true
+  }, {
+    "id" : "alt-e7afd79c",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794895618079",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 01:06:58",
+    "resolved" : false
+  }, {
+    "id" : "alt-7c79859a",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794895600085",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 01:06:40",
+    "resolved" : false
+  }, {
+    "id" : "alt-8ba1fcb7",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 01:06:40",
+    "resolved" : true
+  }, {
+    "id" : "alt-c191aa5f",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794894867327",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:54:27",
+    "resolved" : false
+  }, {
+    "id" : "alt-9a39411b",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794894849336",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:54:09",
+    "resolved" : false
+  }, {
+    "id" : "alt-7b8a8120",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:54:09",
+    "resolved" : true
+  }, {
+    "id" : "alt-1de1a1cf",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794894812833",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:53:32",
+    "resolved" : false
+  }, {
+    "id" : "alt-a6f834d7",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794894794853",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:53:14",
+    "resolved" : false
+  }, {
+    "id" : "alt-703a369c",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:53:14",
+    "resolved" : true
+  }, {
+    "id" : "alt-d71085e7",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794894705319",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:51:45",
+    "resolved" : false
+  }, {
+    "id" : "alt-56bdeaf0",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794894687318",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:51:27",
+    "resolved" : false
+  }, {
+    "id" : "alt-bc6d8d19",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:51:27",
+    "resolved" : true
+  }, {
+    "id" : "alt-04f98a72",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794894640314",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:50:40",
+    "resolved" : false
+  }, {
+    "id" : "alt-15bd4725",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794894622333",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:50:22",
+    "resolved" : false
+  }, {
+    "id" : "alt-176304ce",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:50:22",
+    "resolved" : true
+  }, {
+    "id" : "alt-dcc3fe31",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794894586322",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:49:46",
+    "resolved" : false
+  }, {
+    "id" : "alt-7250b3e8",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794894568036",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:49:28",
+    "resolved" : false
+  }, {
+    "id" : "alt-7e75a94a",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:49:28",
+    "resolved" : true
+  }, {
+    "id" : "alt-0c34bd64",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794894532043",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (70% >= 70%)). Consumo simulado: 3.6 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:48:52",
+    "resolved" : false
+  }, {
+    "id" : "alt-d00b76da",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794894514041",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad en o bajo 30%). Humedad inicial: 30%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:48:34",
+    "resolved" : false
+  }, {
+    "id" : "alt-9b655e9d",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (30% <= mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:48:34",
+    "resolved" : true
+  }, {
+    "id" : "alt-c9c98df7",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794893259276",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Detención manual por operador). Consumo simulado: 5.0 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:27:39",
+    "resolved" : false
+  }, {
+    "id" : "alt-07bb190d",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794893234195",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad bajo 30%). Humedad inicial: 28%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:27:14",
+    "resolved" : false
+  }, {
+    "id" : "alt-08db9234",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (28% < mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:27:14",
+    "resolved" : true
+  }, {
+    "id" : "alt-bfef398d",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "SUCCESS",
+    "priority" : "BAJA",
+    "code" : "PUMP_DONE_1794893194594",
+    "message" : "Riego finalizado en Zona 1 - Tomates Cherry (Umbral máximo alcanzado (72%)). Consumo simulado: 4.0 L.",
+    "recommendation" : "Ciclo registrado correctamente en el historial estadístico.",
+    "timestamp" : "2026-11-17 00:26:34",
+    "resolved" : false
+  }, {
+    "id" : "alt-1abbd6b2",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "HIGH_MOISTURE",
+    "message" : "Saturación de humedad detectada en Zona 1 - Tomates Cherry (72% > máximo 70%).",
+    "recommendation" : "Detenga el riego para evitar asfixia radicular y desperdicio de agua.",
+    "timestamp" : "2026-11-17 00:26:34",
+    "resolved" : true
+  }, {
+    "id" : "alt-3f977379",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "PUMP_START_1794893174807",
+    "message" : "Riego iniciado en Zona 1 - Tomates Cherry (Histéresis: Humedad bajo 30%). Humedad inicial: 28%.",
+    "recommendation" : "Monitoree el incremento de humedad o espere la detención automática.",
+    "timestamp" : "2026-11-17 00:26:14",
+    "resolved" : false
+  }, {
+    "id" : "alt-4dd569f0",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (28% < mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:26:14",
+    "resolved" : true
+  }, {
+    "id" : "alt-98093f1b",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "WARNING",
+    "priority" : "MEDIA",
+    "code" : "LOW_MOISTURE",
+    "message" : "Humedad baja detectada en Zona 1 - Tomates Cherry (28% < mínimo 30%).",
+    "recommendation" : "El sistema automático gestionará el encendido tras validar tanque y tiempo de espera (cooldown).",
+    "timestamp" : "2026-11-17 00:26:14",
+    "resolved" : true
+  }, {
+    "id" : "alt-1",
+    "zoneId" : "zone-1",
+    "zoneName" : "Zona 1 - Tomates Cherry",
+    "type" : "INFO",
+    "priority" : "BAJA",
+    "code" : "SYSTEM_START",
+    "message" : "Motor de simulación y automatización AgroSmart IoT activo.",
+    "recommendation" : "Verifique los umbrales de humedad o utilice el Laboratorio de Simulación para evaluar escenarios.",
+    "timestamp" : "2026-11-16 23:44:20",
+    "resolved" : true
+  } ]
+}

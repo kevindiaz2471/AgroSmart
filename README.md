@@ -1,83 +1,117 @@
 # Sistema de Gestión de Riego Automatizado - IoT Agrícola 🌾💧
 
-[![GitLab CI](https://img.shields.io/badge/GitLab-CI%2FCD-orange?logo=gitlab)](https://gitlab.upec.edu.ec/grupo-sostenibilidad/sistema-de-gestion-de-riego-automatizado)
+[![React](https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-61dafb?logo=react)](frontend/)
+[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38bdf8?logo=tailwindcss)](frontend/)
+[![Axios](https://img.shields.io/badge/HTTP%20Client-Axios-5a29e4?logo=axios)](frontend/)
+[![Spring Boot](https://img.shields.io/badge/Backend-Spring%20Boot%203.3-6db33f?logo=springboot)](backend/)
+[![Hardware](https://img.shields.io/badge/Microcontroller-ESP32-blue.svg)](https://www.espressif.com/en/products/socs/esp32)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![IoT Microcontroller](https://img.shields.io/badge/Hardware-ESP32-blue.svg)](https://www.espressif.com/en/products/socs/esp32)
 
-Sistema integral de automatización, monitoreo y control inteligente de riego agrícola basado en microcontroladores ESP32, sensores de humedad de suelo capacitivos, control por histéresis y perro guardián hardware (*watchdog timer*).
-
----
-
-## 📌 Características Principales
-
-- **Gestión Multi-Lugar y Multi-Zona**: Permite registrar múltiples fincas/invernaderos y subdividirlos en zonas de riego independientes.
-- **Automatización por Histéresis**: Activa automáticamente la bomba si la humedad del suelo cae por debajo de $H_{\text{mín}}$ (ej. 30%) y la detiene al alcanzar $H_{\text{máx}}$ (ej. 70%).
-- **Protección Fail-Safe & Perro Guardián**: Tiempo de corte automático máximo (watchdog) para prevenir inundación por desborde y protección contra marcha en seco del depósito.
-- **Triple Modo de Operación**:
-  - 🤖 **Automático**: Controlado por sensor de humedad capacitivo.
-  - 🖐️ **Manual**: Accionamiento directo ON/OFF por el usuario.
-  - ⏰ **Programado**: Horarios y cronogramas predefinidos.
-- **Dashboard Web Interactivo**: Interfaz moderna en modo oscuro para monitoreo en tiempo real, configuración de umbrales y registro de historial.
+Sistema integral de automatización, monitoreo y control inteligente de riego agrícola con arquitectura **Full-Stack moderna**:
+- **Frontend**: Desarrollado en **React 19** con **Vite**, estilizado con **Tailwind CSS** y consumo de servicios REST mediante **Axios**.
+- **Backend**: Desarrollado en **Spring Boot 3.3 (Java)** con endpoints RESTful, validación, CORS y servicios de estado en tiempo real.
+- **Hardware / IoT**: Controladores ESP32 con sensores capacitivos de humedad de suelo, relés de bombeo, histéresis y protección de seguridad (*watchdog timer*).
 
 ---
 
-## 📂 Estructura del Repositorio
+## 🏗️ Arquitectura del Sistema
 
 ```text
-├── index.html                       # Layout principal del Dashboard Web
-├── styles.css                       # Sistema de diseño CSS3 (Dark Mode, responsive)
-├── app.js                           # Motor de simulación y lógica de control IoT
-├── sistema_riego_iot_propuesta.md   # Documentación técnica completa (18 entregables, PlantUML, SQL, API REST)
-├── .gitignore                       # Archivos ignorados por Git
-└── README.md                        # Documentación principal del proyecto
+EMPRENDIEMINTO/
+├── frontend/                     # Aplicación React + Vite + Tailwind CSS + Axios
+│   ├── src/
+│   │   ├── components/           # Componentes modulares (Navbar, Gauge, PumpControl, Tabs, Tables, Modals)
+│   │   ├── services/api.js       # Cliente Axios centralizado con interceptores y fallback
+│   │   ├── App.jsx               # Contenedor principal de la aplicación y lógica de control
+│   │   ├── index.css             # Tailwind CSS y animaciones (olas de agua, gauge)
+│   │   └── main.jsx              # Punto de entrada React
+│   ├── package.json              # Dependencias (react, tailwindcss, axios, lucide-react)
+│   └── vite.config.js            # Configuración de Vite y proxy /api hacia Spring Boot (8080)
+│
+├── backend/                      # Backend Spring Boot 3.3 (Java)
+│   ├── src/main/java/com/agrosmart/iot/
+│   │   ├── AgroSmartApplication.java  # Clase principal Spring Boot
+│   │   ├── config/CorsConfig.java    # Configuración de CORS para clientes web
+│   │   ├── controller/               # Controladores REST (Auth, Places, Zones, History, Alerts)
+│   │   ├── model/                    # Modelos de datos (User, Place, Zone, Schedule, etc.)
+│   │   └── service/DataStoreService  # Servicio de persistencia y reglas de negocio
+│   ├── src/main/resources/
+│   │   └── application.properties    # Configuración del servidor (puerto 8080)
+│   ├── pom.xml                       # Descriptor Maven de dependencias Spring Boot
+│   └── start-backend.ps1             # Script PowerShell para iniciar Spring Boot fácilmente
+│
+├── package.json                  # Scripts globales para ejecutar Frontend y Backend
+└── README.md                     # Documentación general
 ```
 
 ---
 
 ## 🚀 Guía de Inicio Rápido
 
-### 1. Ejecución del Dashboard Web (Local)
-No requiere instalación de dependencias pesadas. Abre directamente el archivo `index.html` en cualquier navegador web moderno (Chrome, Firefox, Edge, Safari):
-
+### 1. Iniciar el Frontend (React + Tailwind + Axios)
+En la terminal principal ejecuta:
 ```bash
-# O en la terminal de tu SO:
-start index.html   # En Windows
-open index.html    # En macOS
-xdg-open index.html # En Linux
+# Iniciar servidor de desarrollo Vite
+npm run frontend
+# o también:
+cd frontend
+npm run dev
 ```
+La aplicación abrirá en: **`http://localhost:5173`**
 
-### 2. Vinculación y Envío a GitLab
-
-Si estás clonando o vinculando este repositorio a GitLab UPEC:
-
-```bash
-# 1. Inicializar repositorio git local
-git init
-
-# 2. Agregar origen del repositorio GitLab
-git remote add origin https://gitlab.upec.edu.ec/grupo-sostenibilidad/sistema-de-gestion-de-riego-automatizado.git
-
-# 3. Añadir archivos al stage
-git add .
-
-# 4. Crear commit inicial
-git commit -m "feat: arquitectura completa de sistema de riego IoT y dashboard interactivo"
-
-# 5. Subir a la rama principal (main / master)
-git branch -M main
-git push -u origin main
+### 2. Iniciar el Backend (Spring Boot 3.3)
+En otra ventana de terminal:
+```powershell
+cd backend
+.\start-backend.ps1
 ```
+*(Si ya tienes Maven instalado en el PATH, también puedes ejecutar `mvn spring-boot:run`)*.  
+El backend REST responderá en: **`http://localhost:8080/api`**
 
 ---
 
-## 📄 Propuesta Técnica e Ingeniería de Software
-
-Para consultar todos los diagramas **PlantUML** (Casos de Uso, Clases, Secuencia, ERD), el modelo DDL SQL para PostgreSQL/TimescaleDB, las recomendaciones de hardware BOM y el firmware ESP32 en C++, revisa el documento adjunto:
-
-📌 [Ver Propuesta Técnica de Ingeniería (sistema_riego_iot_propuesta.md)](sistema_riego_iot_propuesta.md)
+## 🔑 Credenciales Demo
+Para acceder al dashboard desde el formulario de inicio de sesión:
+- **Email:** `admin@agrosmart.io`
+- **Contraseña:** `admin123`
+*(O haz clic directamente en el botón **"Cargar Demo"** del modal de bienvenida)*.
 
 ---
 
-## 🔐 Licencia y Créditos
+## 📡 Endpoints de la API REST (Spring Boot)
 
-Desarrollado para el **Grupo de Sostenibilidad - UPEC** (Universidad Politécnica Estatal del Carchi).
+| Método | Endpoint | Descripción |
+|---|---|---|
+| `POST` | `/api/auth/login` | Iniciar sesión y obtener token |
+| `POST` | `/api/auth/register` | Registro de nuevos operadores/ingenieros |
+| `GET` | `/api/places` | Listado de fincas o parcelas |
+| `POST` | `/api/places` | Crear nueva finca o lugar |
+| `GET` | `/api/zones` | Listado de todas las zonas de cultivo |
+| `GET` | `/api/zones?placeId={id}` | Zonas filtradas por finca |
+| `PUT` | `/api/zones/{id}/mode` | Cambiar modo (`AUTO`, `MANUAL`, `SCHEDULED`) |
+| `PUT` | `/api/zones/{id}/config` | Modificar umbrales $H_{\text{mín}}$, $H_{\text{máx}}$, watchdog y frecuencia |
+| `POST` | `/api/zones/{id}/pump` | Accionar bomba de agua (`{ "state": true \| false }`) |
+| `POST` | `/api/zones/{id}/telemetry`| Transmitir lectura de humedad y estado de sensores |
+| `POST` | `/api/zones/{id}/schedules`| Registrar nuevo turno de riego programado |
+| `DELETE`| `/api/zones/{id}/schedules/{id}` | Eliminar turno programado |
+| `GET` | `/api/history` | Obtener historial de activaciones |
+| `DELETE`| `/api/history` | Vaciar historial de eventos |
+| `GET` | `/api/alerts` | Listado de alertas y advertencias de seguridad |
+
+---
+
+## 💧 Características de la Aplicación
+
+1. **Indicador de Humedad SVG con Histéresis:**
+   - Visualización circular en tiempo real con degradado reactivo.
+   - Umbrales configurables $H_{\text{mín}}$ y $H_{\text{máx}}$.
+   - Control deslizante interactivo y botón de simulación de desecamiento (**"Auto Secar"**).
+
+2. **Controlador de Actuador (Bomba de Agua):**
+   - Animación de olas fluidas en CSS durante el riego activo.
+   - Botones rápidos de control manual (*Encender Riego* / *Detener Riego*).
+   - Sensor de seguridad de depósito con alerta de cavitación y temporizador Watchdog.
+
+3. **Gestión de Turnos y Alertas:**
+   - Programación de turnos por días de la semana y duración en minutos.
+   - Notificaciones y registro de eventos en tabla histórica con exportación de estado.

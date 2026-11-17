@@ -4,6 +4,12 @@ node_modules/
 .idea/
 *.log
 
+# Build outputs
+target/
+dist/
+dist-ssr/
+.tools/
+
 # OS Files
 .DS_Store
 Thumbs.db

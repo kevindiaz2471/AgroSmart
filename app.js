@@ -2,6 +2,33 @@
    AgroSmart IoT - Core Application, Authentication & Control Engine
    ========================================================================== */
 
+// Axios HTTP Client Configuration (Connects to Spring Boot Backend or falls back to local state)
+const agroApi = typeof axios !== 'undefined' ? axios.create({
+    baseURL: 'http://localhost:8080/api',
+    timeout: 4000,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+}) : null;
+
+if (agroApi) {
+    agroApi.interceptors.request.use((config) => {
+        const savedSession = localStorage.getItem('agrosmart_session');
+        if (savedSession) {
+            try {
+                const user = JSON.parse(savedSession);
+                if (user && user.token) {
+                    config.headers.Authorization = `Bearer ${user.token}`;
+                }
+            } catch (err) {
+                console.warn('Error leyendo token en interceptor Axios:', err);
+            }
+        }
+        return config;
+    });
+}
+
 // Mock Database & Session State
 const appState = {
     // Current Authenticated User Session
@@ -476,18 +503,17 @@ function startControlLoop() {
 
             // CORE AUTOMATION HYSTERESIS RULE
             if (zone.mode === "AUTO") {
-                // Rule 1: Activate if moisture < min
-                if (zone.currentMoisture < zone.minMoisture && !zone.pumpState) {
-                    if (zone.tankOk) {
+                // Priority Stop: Deactivate immediately if moisture >= max
+                if (zone.currentMoisture >= zone.maxMoisture && zone.pumpState) {
+                    triggerPump(zone, false, "AUTO");
+                }
+                // Start: Activate if moisture <= min
+                else if (zone.currentMoisture <= zone.minMoisture && !zone.pumpState) {
+                    if (zone.tankOk && zone.sensorOk !== false) {
                         triggerPump(zone, true, "AUTO");
-                    } else {
+                    } else if (!zone.tankOk) {
                         addAlert(zone.id, "TANQUE_VACIO", "No se puede iniciar el riego automático: Depósito de agua vacío.");
                     }
-                }
-                
-                // Rule 2: Deactivate if moisture >= max
-                else if (zone.currentMoisture >= zone.maxMoisture && zone.pumpState) {
-                    triggerPump(zone, false, "AUTO");
                 }
             }
 
@@ -522,6 +548,14 @@ function triggerPump(zone, state, triggerType = "MANUAL") {
         // Turning ON
         if (!zone.tankOk) {
             alert("Error: El depósito de agua está vacío. No se puede encender la bomba.");
+            return;
+        }
+        if (zone.mode === "AUTO" && triggerType === "AUTO" && zone.currentMoisture > zone.minMoisture) {
+            zone.pumpState = false;
+            return;
+        }
+        if (zone.mode === "AUTO" && zone.currentMoisture >= zone.maxMoisture) {
+            zone.pumpState = false;
             return;
         }
         zone.pumpState = true;
@@ -664,7 +698,15 @@ function setupEventListeners() {
         const zone = getCurrentZone();
         if (zone) {
             zone.currentMoisture = parseFloat(e.target.value);
+            if (zone.mode === "AUTO") {
+                if (zone.currentMoisture >= zone.maxMoisture && zone.pumpState) {
+                    triggerPump(zone, false, "AUTO");
+                } else if (zone.currentMoisture <= zone.minMoisture && !zone.pumpState && zone.tankOk && zone.sensorOk !== false) {
+                    triggerPump(zone, true, "AUTO");
+                }
+            }
             updateMoistureUI(zone.currentMoisture);
+            updatePumpUI(zone.pumpState);
         }
     });
 
