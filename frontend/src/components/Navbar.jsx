@@ -14,7 +14,8 @@ import {
   Sliders,
   FlaskConical,
   Sun,
-  Moon
+  Moon,
+  Sparkles
 } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -45,7 +46,9 @@ export default function Navbar({
   unresolvedAlertsCount = 0,
   isAutoSimulating = false,
   theme = 'light',
-  onToggleTheme
+  onToggleTheme,
+  isLandingView = false,
+  onToggleLanding
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -190,6 +193,24 @@ export default function Navbar({
             <BookOpen className="w-3.5 h-3.5" style={{ color: '#A7C957' }} />
             <span style={{ color: '#FFFFFF' }}>Guía</span>
           </button>
+
+          {/* Toggle Landing / Dashboard Button */}
+          {onToggleLanding && (
+            <button
+              type="button"
+              onClick={onToggleLanding}
+              title={isLandingView ? 'Regresar al Dashboard Operativo' : 'Ver Portal Promocional e Informativo'}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-bold cursor-pointer transition-all shadow-xs"
+              style={{
+                backgroundColor: isLandingView ? '#A7C957' : '#6A994E',
+                borderColor: isLandingView ? '#A7C957' : '#6A994E',
+                color: isLandingView ? '#1B3A28' : '#FFFFFF'
+              }}
+            >
+              <Sparkles className="w-3.5 h-3.5" style={{ color: isLandingView ? '#1B3A28' : '#FFFFFF' }} />
+              <span>{isLandingView ? 'Ver Dashboard' : 'Portal AgTech'}</span>
+            </button>
+          )}
 
           {/* User Profile */}
           <div
@@ -433,6 +454,25 @@ export default function Navbar({
               </button>
             </div>
           </div>
+
+          {onToggleLanding && (
+            <button
+              type="button"
+              onClick={() => {
+                onToggleLanding();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border text-xs font-bold"
+              style={{
+                backgroundColor: isLandingView ? '#A7C957' : '#6A994E',
+                borderColor: isLandingView ? '#A7C957' : '#6A994E',
+                color: isLandingView ? '#1B3A28' : '#FFFFFF'
+              }}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>{isLandingView ? 'Regresar al Dashboard' : 'Ver Portal Promocional AgTech'}</span>
+            </button>
+          )}
 
           <button
             type="button"

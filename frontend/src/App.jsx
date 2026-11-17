@@ -21,6 +21,7 @@ import PlaceModal from './components/PlaceModal';
 import ZoneModal from './components/ZoneModal';
 import UserManualModal from './components/UserManualModal';
 import SectionModal from './components/SectionModal';
+import LandingPage from './components/LandingPage';
 
 import {
   Layers,
@@ -58,6 +59,7 @@ export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('agrosmart_theme_v2') || 'light');
   const [isBackendOnline, setIsBackendOnline] = useState(false);
   const [activeModal, setActiveModal] = useState(null); // null | 'schedules' | 'history' | 'alerts' | 'config' | 'simulation'
+  const [viewMode, setViewMode] = useState('dashboard'); // 'dashboard' | 'landing'
 
   // Places & Zones
   const [places, setPlaces] = useState([]);
@@ -645,8 +647,13 @@ export default function App() {
         isAutoSimulating={isAutoSimulating}
         theme={theme}
         onToggleTheme={handleToggleTheme}
+        isLandingView={viewMode === 'landing'}
+        onToggleLanding={() => setViewMode((prev) => (prev === 'landing' ? 'dashboard' : 'landing'))}
       />
 
+      {viewMode === 'landing' ? (
+        <LandingPage onGoToDashboard={() => setViewMode('dashboard')} />
+      ) : (
       <main className="max-w-7xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-4 sm:py-6 flex-1 space-y-6">
         {/* Executive KPI Summary Cards Bar */}
         {currentZone && (
@@ -1137,6 +1144,7 @@ export default function App() {
           </aside>
         </div>
       </main>
+      )}
 
       {/* Modals */}
       <PlaceModal

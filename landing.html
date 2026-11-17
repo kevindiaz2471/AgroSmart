@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroSmart IoT | Riego Inteligente y Automatización Agrícola</title>
+  
+  <!-- Tipografías Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            agro: {
+              forest: '#244C36',
+              forestDark: '#163022',
+              leaf: '#6A994E',
+              crop: '#A7C957',
+              cream: '#F2EFE6',
+              white: '#FFFFFF',
+              earth: '#B87543',
+              harvest: '#E9A23B',
+              water: '#2A9D8F',
+              textMuted: '#526052'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F2EFE6;
+      color: #1B3B2B;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-shadow {
+      box-shadow: 0 10px 30px -5px rgba(36, 76, 54, 0.08), 0 4px 12px -2px rgba(36, 76, 54, 0.04);
+    }
+    .custom-shadow-card {
+      box-shadow: 0 4px 16px -2px rgba(36, 76, 54, 0.06);
+    }
+    .glass-header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-emerald-200 selection:text-emerald-950">
+
+  <!-- =========================================================================
+      1. NAVBAR PROMOCIONAL
+      ========================================================================= -->
+  <header class="sticky top-0 z-50 glass-header border-b border-agro-forest/10 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logotipo y Nombre -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-agro-forest to-agro-forestDark text-white flex items-center justify-center shadow-md shadow-agro-forest/20 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-seedling text-agro-crop text-xl"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-xl tracking-tight text-agro-forest">AgroSmart</span>
+            <span class="bg-agro-leaf text-white text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider uppercase">IoT</span>
+          </div>
+          <p class="text-[11px] text-agro-textMuted font-medium hidden sm:block">Tecnología de Riego de Precisión</p>
+        </div>
+      </a>
+
+      <!-- Menú Desktop -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-agro-textMuted">
+        <a href="#beneficios" class="hover:text-agro-forest transition-colors">Beneficios</a>
+        <a href="#aplicaciones" class="hover:text-agro-forest transition-colors">Usos en Campo</a>
+        <a href="#ayuda-agricultor" class="hover:text-agro-forest transition-colors">Ayuda al Agricultor</a>
+        <a href="#calculadora" class="hover:text-agro-forest transition-colors">Calculadora de Ahorro</a>
+        <a href="#testimonios" class="hover:text-agro-forest transition-colors">Casos de Éxito</a>
+      </nav>
+
+      <!-- Botón Principal al Sistema -->
+      <div class="flex items-center gap-3">
+        <a href="http://localhost:5173/" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-agro-forest hover:bg-agro-forestDark text-white font-bold text-sm shadow-md shadow-agro-forest/25 transition-all hover:scale-[1.02] active:scale-[0.98]">
+          <span>Entrar a la Plataforma</span>
+          <i class="fa-solid fa-arrow-right text-agro-crop text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+      2. HERO SECTION
+      ========================================================================= -->
+  <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Textos y Propuesta de Valor -->
+        <div class="lg:col-span-7 flex flex-col items-start">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-agro-leaf/15 border border-agro-leaf/30 text-agro-forest font-semibold text-xs mb-6">
+            <i class="fa-solid fa-sparkles text-agro-leaf"></i>
+            <span>Plataforma Inteligente Diseñada para Agricultores</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-agro-forest tracking-tight leading-[1.15] mb-6">
+            Riego Inteligente que Cuida tu Cosecha y <span class="text-agro-leaf underline decoration-agro-crop decoration-wavy decoration-2">Multiplica tu Agua</span>
+          </h1>
+
+          <p class="text-lg sm:text-xl text-agro-textMuted leading-relaxed mb-8 max-w-2xl">
+            AgroSmart IoT monitorea la humedad del suelo en tiempo real, activa el riego únicamente cuando las raíces lo demandan y apaga la electrobomba de forma automática al alcanzar el nivel óptimo. <strong>Ahorra agua, reduce la factura de luz y protege tus equipos de bombeo.</strong>
+          </p>
+
+          <!-- Acciones Hero -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-10">
+            <a href="http://localhost:5173/" target="_blank" class="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-xl bg-agro-forest hover:bg-agro-forestDark text-white font-bold text-base shadow-lg shadow-agro-forest/30 transition-all hover:scale-[1.02]">
+              <i class="fa-solid fa-gauge-high text-agro-crop text-lg"></i>
+              <span>Probar Sistema en Vivo</span>
+            </a>
+
+            <a href="#calculadora" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white border-2 border-agro-forest/20 hover:border-agro-forest text-agro-forest font-bold text-base transition-all hover:bg-agro-cream">
+              <i class="fa-solid fa-calculator text-agro-leaf"></i>
+              <span>Calcular Mi Ahorro</span>
+            </a>
+          </div>
+
+          <!-- Métricas Destacadas -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 w-full pt-6 border-t border-agro-forest/15">
+            <div class="bg-white/80 p-3.5 sm:p-4 rounded-xl border border-agro-forest/10 custom-shadow-card">
+              <span class="block text-2xl sm:text-3xl font-extrabold text-agro-leaf font-mono">45%</span>
+              <span class="text-xs text-agro-textMuted font-semibold">Ahorro hídrico verificado</span>
+            </div>
+            <div class="bg-white/80 p-3.5 sm:p-4 rounded-xl border border-agro-forest/10 custom-shadow-card">
+              <span class="block text-2xl sm:text-3xl font-extrabold text-agro-forest font-mono">24/7</span>
+              <span class="text-xs text-agro-textMuted font-semibold">Protección de la bomba</span>
+            </div>
+            <div class="bg-white/80 p-3.5 sm:p-4 rounded-xl border border-agro-forest/10 custom-shadow-card">
+              <span class="block text-2xl sm:text-3xl font-extrabold text-agro-earth font-mono">+30%</span>
+              <span class="text-xs text-agro-textMuted font-semibold">Calibre y calidad del fruto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta Interactiva / Mockup Telemetría -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-3xl p-6 sm:p-8 custom-shadow border border-agro-forest/15 relative">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <span class="font-bold text-sm text-agro-forest">Sonda Lote #1: Invernadero Tomate</span>
+              </div>
+              <span class="bg-agro-crop/20 text-agro-forest text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
+                Modo Auto Activo
+              </span>
+            </div>
+
+            <!-- Manómetro de Humedad -->
+            <div class="py-6 flex flex-col items-center">
+              <div class="relative w-44 h-44 flex items-center justify-center">
+                <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#E5E7EB" stroke-width="10" fill="transparent" />
+                  <circle cx="50" cy="50" r="40" stroke="#6A994E" stroke-width="10" stroke-dasharray="251.2" stroke-dashoffset="80" stroke-linecap="round" fill="transparent" />
+                </svg>
+                <div class="absolute flex flex-col items-center">
+                  <span class="text-4xl font-extrabold text-agro-forest font-mono">68%</span>
+                  <span class="text-xs font-semibold text-agro-leaf flex items-center gap-1">
+                    <i class="fa-solid fa-droplet text-xs"></i> Humedad Óptima
+                  </span>
+                </div>
+              </div>
+              <p class="text-xs text-agro-textMuted mt-2 text-center">
+                Histéresis activa: Riego en <strong>30%</strong> • Parada en <strong>70%</strong>
+              </p>
+            </div>
+
+            <!-- Estado de la Bomba y Seguridad -->
+            <div class="space-y-3">
+              <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-agro-forest text-white flex items-center justify-center">
+                    <i class="fa-solid fa-shield-halved text-agro-crop"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-bold text-agro-forest">Marcha en Seco Blindada</h4>
+                    <p class="text-[11px] text-emerald-800">Nivel de reservorio: 85% (Seguro)</p>
+                  </div>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full">
+                  OK
+                </span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+                <span class="text-slate-600 font-medium">Presión en línea de goteo:</span>
+                <span class="font-mono font-bold text-agro-forest">2.4 BAR (Nominal)</span>
+              </div>
+            </div>
+
+            <a href="http://localhost:5173/" target="_blank" class="w-full mt-5 py-3 rounded-xl bg-slate-100 hover:bg-agro-forest hover:text-white text-agro-forest font-bold text-xs flex items-center justify-center gap-2 transition-all">
+              <span>Abrir Consola de Control en Vivo</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+      3. BENEFICIOS CLAVE
+      ========================================================================= -->
+  <section id="beneficios" class="py-20 bg-white border-y border-agro-forest/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-agro-leaf font-bold text-xs uppercase tracking-wider bg-agro-leaf/10 px-3 py-1 rounded-full">
+          Soluciones de Campo Comprobadas
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-agro-forest tracking-tight mt-3">
+          Beneficios que Transforman la Realidad de tu Explotación
+        </h2>
+        <p class="text-base sm:text-lg text-agro-textMuted mt-3">
+          Diseñado con base en las necesidades reales del agricultor: cuidar el agua disponible, evitar roturas mecánicas y elevar la rentabilidad del cultivo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Beneficio 1 -->
+        <div class="bg-agro-cream/60 rounded-2xl p-6 border border-agro-forest/10 hover:border-agro-leaf transition-all hover:shadow-md flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-agro-forest text-white flex items-center justify-center mb-5 shadow-sm">
+              <i class="fa-solid fa-droplet text-agro-crop text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-agro-forest mb-2">Ahorro Drástico de Agua</h3>
+            <p class="text-sm text-agro-textMuted leading-relaxed">
+              Riega solo cuando la raíz lo exige según el porcentaje real de humedad. Evita la sobre-infiltración y la pérdida por escorrentía, reduciendo el consumo hídrico hasta un 45%.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-agro-forest/10 flex items-center gap-2 text-xs font-bold text-agro-leaf">
+            <i class="fa-solid fa-circle-check"></i> Hasta 45% de ahorro garantizado
+          </div>
+        </div>
+
+        <!-- Beneficio 2 -->
+        <div class="bg-agro-cream/60 rounded-2xl p-6 border border-agro-forest/10 hover:border-agro-leaf transition-all hover:shadow-md flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-agro-forest text-white flex items-center justify-center mb-5 shadow-sm">
+              <i class="fa-solid fa-shield-halved text-agro-crop text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-agro-forest mb-2">Cero Motores Quemados</h3>
+            <p class="text-sm text-agro-textMuted leading-relaxed">
+              Apagado preventivo autónomo en 3 segundos si el nivel del pozo, cisterna o canal decae, o si existe descebe en la tubería, protegiendo sellos mecánicos y bobinados.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-agro-forest/10 flex items-center gap-2 text-xs font-bold text-agro-leaf">
+            <i class="fa-solid fa-circle-check"></i> Corte instantáneo contra marcha en seco
+          </div>
+        </div>
+
+        <!-- Beneficio 3 -->
+        <div class="bg-agro-cream/60 rounded-2xl p-6 border border-agro-forest/10 hover:border-agro-leaf transition-all hover:shadow-md flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-agro-forest text-white flex items-center justify-center mb-5 shadow-sm">
+              <i class="fa-solid fa-mobile-screen-button text-agro-crop text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-agro-forest mb-2">Control en Tu Teléfono</h3>
+            <p class="text-sm text-agro-textMuted leading-relaxed">
+              Supervisa el estado del cultivo desde tu hogar o en carretera. Enciende o apaga sectores, revisa el historial y recibe alertas sin tener que viajar a la caseta de bombeo.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-agro-forest/10 flex items-center gap-2 text-xs font-bold text-agro-leaf">
+            <i class="fa-solid fa-circle-check"></i> Compatible con cualquier celular
+          </div>
+        </div>
+
+        <!-- Beneficio 4 -->
+        <div class="bg-agro-cream/60 rounded-2xl p-6 border border-agro-forest/10 hover:border-agro-leaf transition-all hover:shadow-md flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-agro-forest text-white flex items-center justify-center mb-5 shadow-sm">
+              <i class="fa-solid fa-bolt text-agro-crop text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-agro-forest mb-2">Menor Gasto de Electricidad</h3>
+            <p class="text-sm text-agro-textMuted leading-relaxed">
+              Automatiza el riego en horarios de tarifa eléctrica nocturna o en momentos de menor evaporación solar, ahorrando significativamente en cada factura mensual.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-agro-forest/10 flex items-center gap-2 text-xs font-bold text-agro-leaf">
+            <i class="fa-solid fa-circle-check"></i> Reducción de costos de bombeo
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+      4. USOS EN CAMPO
+      ========================================================================= -->
+  <section id="aplicaciones" class="py-20 bg-agro-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-agro-leaf font-bold text-xs uppercase tracking-wider bg-agro-leaf/10 px-3 py-1 rounded-full">
+            Versatilidad Productiva
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-agro-forest tracking-tight mt-3">
+            Adaptado a Cada Sistema Agrícola
+          </h2>
+        </div>
+        <p class="text-base text-agro-textMuted max-w-md mt-4 md:mt-0">
+          Hardware robusto y algoritmos agronómicos probados en diversas condiciones de suelo, cultivo y clima.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Invernaderos -->
+        <div class="bg-white rounded-2xl p-6 border border-agro-forest/10 custom-shadow-card flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-agro-forest flex items-center justify-center mb-4">
+              <i class="fa-solid fa-warehouse text-agro-forest"></i>
+            </div>
+            <span class="text-[11px] font-bold text-agro-leaf uppercase tracking-wider">Bajo Cubierta</span>
+            <h3 class="text-lg font-bold text-agro-forest mt-1 mb-2">Invernaderos de Hortalizas</h3>
+            <p class="text-xs sm:text-sm text-agro-textMuted leading-relaxed">
+              Tomates, pimientos, frutillas y flores. Controla la humedad por estrato de sustrato evitando hongos por exceso y optimizando la inyección de fertilizantes.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-agro-forest font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-check text-agro-leaf"></i> Microclima radicular perfecto
+          </div>
+        </div>
+
+        <!-- Frutales -->
+        <div class="bg-white rounded-2xl p-6 border border-agro-forest/10 custom-shadow-card flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-agro-forest flex items-center justify-center mb-4">
+              <i class="fa-solid fa-tree text-agro-forest"></i>
+            </div>
+            <span class="text-[11px] font-bold text-agro-leaf uppercase tracking-wider">Fruticultura</span>
+            <h3 class="text-lg font-bold text-agro-forest mt-1 mb-2">Frutales, Cítricos y Aguacate</h3>
+            <p class="text-xs sm:text-sm text-agro-textMuted leading-relaxed">
+              Monitoreo radicular profundo (30 y 60 cm). Estimula el llenado parejo del fruto y maximiza el calibre comercial requerido para mercados exigentes y exportación.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-agro-forest font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-check text-agro-leaf"></i> Cero asfixia de raíces
+          </div>
+        </div>
+
+        <!-- Campo Abierto -->
+        <div class="bg-white rounded-2xl p-6 border border-agro-forest/10 custom-shadow-card flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-agro-forest flex items-center justify-center mb-4">
+              <i class="fa-solid fa-sun text-agro-forest"></i>
+            </div>
+            <span class="text-[11px] font-bold text-agro-leaf uppercase tracking-wider">Campo Abierto</span>
+            <h3 class="text-lg font-bold text-agro-forest mt-1 mb-2">Cultivos Extensivos y Maíz</h3>
+            <p class="text-xs sm:text-sm text-agro-textMuted leading-relaxed">
+              Maíz, papas, cebolla y pasturas tecnificadas. Optimiza los turnos de agua de pozo o represa y ajusta el riego automáticamente ante precipitaciones imprevistas.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-agro-forest font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-check text-agro-leaf"></i> Mayor rinde por hectárea
+          </div>
+        </div>
+
+        <!-- Riego por Goteo -->
+        <div class="bg-white rounded-2xl p-6 border border-agro-forest/10 custom-shadow-card flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-emerald-100 text-agro-forest flex items-center justify-center mb-4">
+              <i class="fa-solid fa-faucet-drip text-agro-forest"></i>
+            </div>
+            <span class="text-[11px] font-bold text-agro-leaf uppercase tracking-wider">Presurizado</span>
+            <h3 class="text-lg font-bold text-agro-forest mt-1 mb-2">Goteo y Microaspersión</h3>
+            <p class="text-xs sm:text-sm text-agro-textMuted leading-relaxed">
+              Apertura sectorizada de electroválvulas solenoides inteligentes. Balanceo dinámico de presiones en cabezales y monitoreo de caudal en tiempo real.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-agro-forest font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-check text-agro-leaf"></i> Válvulas Smart sectorizadas
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+      5. LA GRAN AYUDA PARA EL AGRICULTOR (COMPARATIVA)
+      ========================================================================= -->
+  <section id="ayuda-agricultor" class="py-20 bg-white border-y border-agro-forest/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-agro-leaf font-bold text-xs uppercase tracking-wider bg-agro-leaf/10 px-3 py-1 rounded-full">
+          Diferencia Tangible en Campo
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-agro-forest tracking-tight mt-3">
+          La Gran Ayuda para el Agricultor: ¿Qué Cambia en tu Día a Día?
+        </h2>
+        <p class="text-base sm:text-lg text-agro-textMuted mt-3">
+          El riego empírico genera pérdidas silenciosas de agua, combustible y dinero. Conoce la transformación con AgroSmart IoT.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Riego Tradicional a Ciegas -->
+        <div class="bg-rose-50/50 rounded-3xl p-7 sm:p-8 border-2 border-rose-200 custom-shadow-card">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center shadow-md shadow-rose-500/20">
+              <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-rose-950">Riego Tradicional a Ciegas</h3>
+              <p class="text-xs text-rose-800 font-medium">Método manual sin sensores ni automatización</p>
+            </div>
+          </div>
+
+          <ul class="space-y-4 text-sm text-rose-950/90">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-xmark text-rose-500 text-lg mt-0.5"></i>
+              <span><strong>Riego por calendario o tanteo superficial:</strong> Se riega sin saber cuánta agua hay en la raíz, provocando asfixia radicular o estrés hídrico latente.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-xmark text-rose-500 text-lg mt-0.5"></i>
+              <span><strong>Riesgo constante de quemar la bomba:</strong> Si el pozo o cisterna se queda sin agua, el motor gira en seco y se funde en cuestión de minutos.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-xmark text-rose-500 text-lg mt-0.5"></i>
+              <span><strong>Pérdida de horas de descanso:</strong> Obligación de madrugar o trasladarse físicamente a encender y apagar llaves y bombas en la oscuridad.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-xmark text-rose-500 text-lg mt-0.5"></i>
+              <span><strong>Cosecha despareja:</strong> Zonas saturadas y sectores secos provocan frutos de menor tamaño y pérdida de valor de venta en el mercado.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Precisión AgroSmart IoT -->
+        <div class="bg-emerald-50/70 rounded-3xl p-7 sm:p-8 border-2 border-emerald-400 custom-shadow relative">
+          <div class="absolute -top-3.5 right-6 bg-agro-forest text-white text-[11px] font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            Con AgroSmart IoT
+          </div>
+
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-agro-forest text-white flex items-center justify-center shadow-md shadow-agro-forest/20">
+              <i class="fa-solid fa-check text-agro-crop text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-agro-forest">Precisión y Tranquilidad Total</h3>
+              <p class="text-xs text-agro-leaf font-medium">Control inteligente por histéresis y seguridad hídrica</p>
+            </div>
+          </div>
+
+          <ul class="space-y-4 text-sm text-agro-forest">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-agro-leaf text-lg mt-0.5 font-bold"></i>
+              <span><strong>Riego automático exacto:</strong> La bomba enciende en 30% y se apaga de forma garantizada al 70%. La planta siempre tiene el agua precisa.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-agro-leaf text-lg mt-0.5 font-bold"></i>
+              <span><strong>Protección blindada del equipo:</strong> Sensores de nivel y de flujo cortan la alimentación ante cualquier falta de agua, evitando averías.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-agro-leaf text-lg mt-0.5 font-bold"></i>
+              <span><strong>Monitoreo en el celular:</strong> Duerme tranquilo y revisa los datos desde cualquier lugar. Ajusta parámetros con un solo toque de pantalla.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-agro-leaf text-lg mt-0.5 font-bold"></i>
+              <span><strong>Mayor rendimiento por hectárea:</strong> Frutos de mejor calibre y peso uniforme aumentan la rentabilidad económica del productor hasta en un 30%.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+      6. CALCULADORA INTERACTIVA DE RETORNO Y AHORRO
+      ========================================================================= -->
+  <section id="calculadora" class="py-20 bg-agro-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-agro-forest/15 custom-shadow">
+        <div class="max-w-3xl mb-10">
+          <span class="text-agro-leaf font-bold text-xs uppercase tracking-wider bg-agro-leaf/10 px-3 py-1 rounded-full">
+            Simulador Económico Agrícola
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-agro-forest tracking-tight mt-3">
+            Calcula el Ahorro de Agua y Dinero en Tu Finca
+          </h2>
+          <p class="text-base text-agro-textMuted mt-2">
+            Desplaza los controles para estimar cuánta agua dejarás de desperdiciar y cuánto dinero ahorrarás anualmente en bombeo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <!-- Controles de Entrada -->
+          <div class="lg:col-span-6 space-y-6">
+            <!-- Hectáreas -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-bold text-agro-forest" for="hectaresInput">Hectáreas en Producción:</label>
+                <span class="font-mono text-xl font-extrabold text-agro-leaf bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200" id="hectaresDisplay">
+                  30 ha
+                </span>
+              </div>
+              <input type="range" id="hectaresInput" min="5" max="150" step="5" value="30" class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#244C36]" oninput="updateLandingCalculator()" />
+              <div class="flex justify-between text-xs text-agro-textMuted font-mono mt-1">
+                <span>5 ha</span>
+                <span>75 ha</span>
+                <span>150+ ha</span>
+              </div>
+            </div>
+
+            <!-- Cultivo -->
+            <div>
+              <label class="text-sm font-bold text-agro-forest block mb-2">Tipo de Cultivo:</label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <button type="button" class="crop-btn p-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer bg-agro-forest text-white border-agro-forest" data-crop="hortalizas" onclick="setCrop('hortalizas', this)">Hortalizas</button>
+                <button type="button" class="crop-btn p-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer bg-slate-50 text-agro-textMuted border-slate-200 hover:border-agro-leaf" data-crop="frutales" onclick="setCrop('frutales', this)">Frutales</button>
+                <button type="button" class="crop-btn p-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer bg-slate-50 text-agro-textMuted border-slate-200 hover:border-agro-leaf" data-crop="maiz" onclick="setCrop('maiz', this)">Maíz</button>
+                <button type="button" class="crop-btn p-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer bg-slate-50 text-agro-textMuted border-slate-200 hover:border-agro-leaf" data-crop="flores" onclick="setCrop('flores', this)">Flores</button>
+              </div>
+            </div>
+
+            <!-- Fuente de Agua -->
+            <div>
+              <label class="text-sm font-bold text-agro-forest block mb-2">Fuente de Agua Primaria:</label>
+              <div class="grid grid-cols-3 gap-2.5">
+                <button type="button" class="source-btn p-3 rounded-xl text-left border transition-all cursor-pointer bg-emerald-50 border-emerald-500 text-agro-forest" data-source="pozo" onclick="setSource('pozo', this)">
+                  <span class="block text-xs font-bold">Pozo Profundo</span>
+                  <span class="text-[10px] text-slate-500">Alto costo eléctrico</span>
+                </button>
+                <button type="button" class="source-btn p-3 rounded-xl text-left border transition-all cursor-pointer bg-white border-slate-200 text-agro-textMuted hover:border-agro-leaf" data-source="canal" onclick="setSource('canal', this)">
+                  <span class="block text-xs font-bold">Canal / Acequia</span>
+                  <span class="text-[10px] text-slate-500">Turnos asignados</span>
+                </button>
+                <button type="button" class="source-btn p-3 rounded-xl text-left border transition-all cursor-pointer bg-white border-slate-200 text-agro-textMuted hover:border-agro-leaf" data-source="reservorio" onclick="setSource('reservorio', this)">
+                  <span class="block text-xs font-bold">Reservorio</span>
+                  <span class="text-[10px] text-slate-500">Bombeo presurizado</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resultados del Simulador -->
+          <div class="lg:col-span-6 bg-gradient-to-br from-agro-forest to-agro-forestDark rounded-3xl p-6 sm:p-8 text-white shadow-lg">
+            <div class="flex items-center justify-between pb-4 border-b border-white/15 mb-6">
+              <span class="text-xs font-bold text-agro-crop uppercase tracking-wider">
+                Impacto Anual Proyectado
+              </span>
+              <span class="text-xs bg-white/10 px-2.5 py-1 rounded-full text-slate-200 font-mono" id="resultsHaLabel">
+                30 Hectáreas
+              </span>
+            </div>
+
+            <div class="space-y-6">
+              <!-- Agua Ahorrada -->
+              <div>
+                <span class="text-xs text-slate-300 font-medium">Volumen de Agua Ahorrada al Año:</span>
+                <div class="text-3xl sm:text-4xl font-extrabold text-agro-crop font-mono mt-1" id="savedWaterDisplay">
+                  81,900 <span class="text-lg font-normal text-slate-200">m³ / año</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1">
+                  Agua dulce que permanece en tu pozo o reservorio para épocas secas.
+                </p>
+              </div>
+
+              <!-- Ahorro en Dinero -->
+              <div class="pt-4 border-t border-white/15">
+                <span class="text-xs text-slate-300 font-medium">Ahorro Estimado en Energía / Bombeo:</span>
+                <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono mt-1" id="savedMoneyDisplay">
+                  $14,742 <span class="text-lg font-normal text-slate-200">USD / año</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1">
+                  Menores horas de funcionamiento continuo de la electrobomba.
+                </p>
+              </div>
+
+              <!-- Retorno de Inversión -->
+              <div class="p-4 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-between">
+                <div>
+                  <span class="text-xs text-slate-200 block">Amortización estimada del sistema:</span>
+                  <span class="text-sm font-bold text-agro-crop">Retorno de inversión (ROI)</span>
+                </div>
+                <span class="text-2xl font-extrabold text-white font-mono" id="roiDisplay">
+                  ~ 3 meses
+                </span>
+              </div>
+            </div>
+
+            <a href="http://localhost:5173/" target="_blank" class="w-full mt-6 py-3.5 rounded-xl bg-agro-leaf hover:bg-emerald-600 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+              <span>Ver Sistema Funcionando en Vivo</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+      7. CASOS DE ÉXITO
+      ========================================================================= -->
+  <section id="testimonios" class="py-20 bg-white border-y border-agro-forest/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-agro-leaf font-bold text-xs uppercase tracking-wider bg-agro-leaf/10 px-3 py-1 rounded-full">
+          Experiencias en Campo
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-agro-forest tracking-tight mt-3">
+          Productores que Protegieron su Inversión con AgroSmart IoT
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-agro-cream/60 rounded-2xl p-6 border border-agro-forest/10 flex flex-col justify-between custom-shadow-card">
+          <p class="text-sm text-agro-textMuted italic leading-relaxed mb-6">
+            "Antes quemábamos dos bombas al año por giros en seco nocturnos cuando el pozo bajaba. Desde que instalamos AgroSmart IoT, el corte preventivo nos ha ahorrado miles de dólares en reparaciones."
+          </p>
+          <div class="flex items-center gap-3 pt-4 border-t border-agro-forest/10">
+            <div class="w-10 h-10 rounded-full bg-agro-forest text-white flex items-center justify-center font-bold text-sm">
+              RM
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-agro-forest">Roberto Morales</h4>
+              <p class="text-xs text-agro-textMuted">Productor de Cítricos • 45 Hectáreas</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-agro-cream/60 rounded-2xl p-6 border border-agro-forest/10 flex flex-col justify-between custom-shadow-card">
+          <p class="text-sm text-agro-textMuted italic leading-relaxed mb-6">
+            "En el tomate bajo invernadero, el exceso de humedad arruinaba la raíz. Con los umbrales de AgroSmart al 70%, la planta se mantiene en equilibrio y logramos calibres óptimos para exportación."
+          </p>
+          <div class="flex items-center gap-3 pt-4 border-t border-agro-forest/10">
+            <div class="w-10 h-10 rounded-full bg-agro-leaf text-white flex items-center justify-center font-bold text-sm">
+              CG
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-agro-forest">Carmen Gutiérrez</h4>
+              <p class="text-xs text-agro-textMuted">Hortalizas Bajo Cubierta • 12 Naves</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-agro-cream/60 rounded-2xl p-6 border border-agro-forest/10 flex flex-col justify-between custom-shadow-card">
+          <p class="text-sm text-agro-textMuted italic leading-relaxed mb-6">
+            "El poder chequear las zonas desde el celular y programar los riegos en la noche nos redujo la planilla de energía un 38%. El sistema se pagó solo en menos de 4 meses."
+          </p>
+          <div class="flex items-center gap-3 pt-4 border-t border-agro-forest/10">
+            <div class="w-10 h-10 rounded-full bg-agro-earth text-white flex items-center justify-center font-bold text-sm">
+              FA
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-agro-forest">Fernando Arteaga</h4>
+              <p class="text-xs text-agro-textMuted">Aguacate Hass • 60 Hectáreas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+      8. FOOTER Y ACCIÓN FINAL
+      ========================================================================= -->
+  <footer class="bg-gradient-to-br from-agro-forest to-agro-forestDark text-white py-14 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-white/15">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center">
+            <i class="fa-solid fa-seedling text-agro-crop text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold">AgroSmart IoT</h3>
+            <p class="text-xs text-slate-300">Gestión Sostenible del Agua y Automatización de Riego</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a href="http://localhost:5173/" target="_blank" class="px-6 py-3 rounded-xl bg-agro-leaf hover:bg-emerald-600 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
+            <span>Abrir Dashboard de Riego</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <p>© 2026 AgroSmart IoT • Universidad Politécnica Estatal del Carchi (UPEC) • Grupo Sostenibilidad.</p>
+        <div class="flex gap-6">
+          <a href="#beneficios" class="hover:text-white transition-colors">Beneficios</a>
+          <a href="#aplicaciones" class="hover:text-white transition-colors">Aplicaciones</a>
+          <a href="#calculadora" class="hover:text-white transition-colors">Calculadora</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lógica Interactiva de la Calculadora en JS Vainilla -->
+  <script>
+    let currentCrop = 'hortalizas';
+    let currentSource = 'pozo';
+
+    const baseWaterPerHa = {
+      hortalizas: 6500,
+      frutales: 8200,
+      maiz: 7400,
+      flores: 9500
+    };
+
+    const costPerM3 = {
+      pozo: 0.18,
+      canal: 0.08,
+      reservorio: 0.12
+    };
+
+    function setCrop(crop, btn) {
+      currentCrop = crop;
+      document.querySelectorAll('.crop-btn').forEach(b => {
+        b.className = 'crop-btn p-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer bg-slate-50 text-agro-textMuted border-slate-200 hover:border-agro-leaf';
+      });
+      btn.className = 'crop-btn p-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer bg-agro-forest text-white border-agro-forest';
+      updateLandingCalculator();
+    }
+
+    function setSource(source, btn) {
+      currentSource = source;
+      document.querySelectorAll('.source-btn').forEach(b => {
+        b.className = 'source-btn p-3 rounded-xl text-left border transition-all cursor-pointer bg-white border-slate-200 text-agro-textMuted hover:border-agro-leaf';
+      });
+      btn.className = 'source-btn p-3 rounded-xl text-left border transition-all cursor-pointer bg-emerald-50 border-emerald-500 text-agro-forest';
+      updateLandingCalculator();
+    }
+
+    function updateLandingCalculator() {
+      const ha = Number(document.getElementById('hectaresInput').value);
+      document.getElementById('hectaresDisplay').innerText = ha + ' ha';
+      document.getElementById('resultsHaLabel').innerText = ha + ' Hectáreas';
+
+      const totalWater = ha * (baseWaterPerHa[currentCrop] || 7000);
+      const savedWater = Math.round(totalWater * 0.42);
+      const savedMoney = Math.round(savedWater * (costPerM3[currentSource] || 0.15));
+      const roiMonths = Math.max(2, Math.round((ha * 85) / (savedMoney / 12)));
+
+      document.getElementById('savedWaterDisplay').innerHTML = savedWater.toLocaleString() + ' <span class="text-lg font-normal text-slate-200">m³ / año</span>';
+      document.getElementById('savedMoneyDisplay').innerHTML = '$' + savedMoney.toLocaleString() + ' <span class="text-lg font-normal text-slate-200">USD / año</span>';
+      document.getElementById('roiDisplay').innerText = '~ ' + roiMonths + ' meses';
+    }
+
+    // Inicialización
+    updateLandingCalculator();
+  </script>
+</body>
+</html>
